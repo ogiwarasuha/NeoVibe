@@ -175,6 +175,20 @@ try {
 
 # 5. Menerapkan Konfigurasi Spicetify & Pasang ke Spotify
 Write-Host "`n[5/5] Menerapkan tema NeoVibe ke Spotify..." -ForegroundColor Cyan
+
+# Daftarkan lokasi Spotify dan berkas prefs secara eksplisit agar Spicetify selalu menemukannya
+$spotifyDir = "$env:APPDATA\Spotify"
+$prefsFile = "$spotifyDir\prefs"
+
+if (!(Test-Path $spotifyDir)) {
+    New-Item -ItemType Directory -Path $spotifyDir -Force | Out-Null
+}
+if (!(Test-Path $prefsFile)) {
+    New-Item -ItemType File -Path $prefsFile -Force | Out-Null
+}
+
+& $spicetifyCmd config spotify_path $spotifyDir
+& $spicetifyCmd config prefs_path $prefsFile
 & $spicetifyCmd config current_theme NeoVibe
 & $spicetifyCmd config inject_theme_js 1
 & $spicetifyCmd config inject_css 1
