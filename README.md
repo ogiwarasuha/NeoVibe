@@ -17,6 +17,7 @@
   - [Langkah 2: Unduh Tema NeoVibe](#langkah-2-unduh-tema-neovibe)
   - [Langkah 3: Terapkan Tema](#langkah-3-terapkan-tema)
 - [Panduan Penggunaan](#panduan-penggunaan)
+- [Panduan Uninstall Bersih (Clean Reset)](#panduan-uninstall-bersih-clean-reset)
 - [Penyelesaian Masalah (FAQ)](#penyelesaian-masalah-faq)
 
 ---
@@ -176,6 +177,60 @@ Spotify akan otomatis memuat ulang dan membuka antarmuka dengan tema NeoVibe.
 - Alternatif pintasan keyboard standar Windows:
   - `Alt + F4` : Menutup aplikasi.
   - `Windows + Panah Bawah` : Me-minimize jendela.
+
+---
+
+## Panduan Uninstall Bersih (Clean Reset)
+
+Jika Anda ingin menghapus tema NeoVibe dan mengembalikan Spotify ke kondisi murni bawaan (*stock/original*), pilih salah satu metode berikut:
+
+### Pilihan 1: Uninstall Otomatis (1 Baris Perintah PowerShell)
+
+Buka **PowerShell** dan jalankan perintah satu baris berikut:
+
+```powershell
+iwr -useb https://raw.githubusercontent.com/ogiwarasuha/NeoVibe/main/uninstall.ps1 | iex
+```
+
+*Skrip ini secara otomatis akan:*
+1. Mengembalikan Spotify ke tampilan standar (*stock*).
+2. Membuka kembali kunci pembaruan otomatis Spotify.
+3. Menghapus folder tema `NeoVibe`.
+4. Membersihkan sisa *cache* modifikasi.
+
+---
+
+### Pilihan 2: Uninstall Manual (Langkah demi Langkah)
+
+Bagi Anda yang ingin menghapus modifikasi secara mandiri melalui PowerShell:
+
+#### Langkah 1: Kembalikan Berkas Spotify ke Bawaan
+Jalankan perintah berikut di PowerShell untuk melepas modifikasi Spicetify:
+```powershell
+spicetify restore
+```
+
+#### Langkah 2: Buka Kunci Pembaruan Otomatis Spotify
+Jika pembaruan otomatis sebelumnya dikunci, buka kuncinya kembali dengan menjalankan perintah berikut:
+```powershell
+$localUpdate = "$env:LOCALAPPDATA\Spotify\Update"
+$roamingUpdate = "$env:APPDATA\Spotify\SpotifyUpdate.exe"
+if (Test-Path $localUpdate) { icacls $localUpdate /reset /q; Remove-Item $localUpdate -Force }
+if (Test-Path $roamingUpdate) { icacls $roamingUpdate /reset /q; Remove-Item $roamingUpdate -Force }
+```
+
+#### Langkah 3: Hapus Berkas Tema NeoVibe
+Hapus folder tema `NeoVibe` dari direktori Spicetify:
+```powershell
+Remove-Item "$env:APPDATA\spicetify\Themes\NeoVibe" -Recurse -Force -ErrorAction SilentlyContinue
+```
+
+#### Langkah 4: (Opsional) Hapus Spicetify CLI Sepenuhnya
+Jika Anda tidak ingin lagi menggunakan Spicetify maupun tema lainnya sama sekali dari komputer Anda:
+```powershell
+Remove-Item "$env:LOCALAPPDATA\spicetify" -Recurse -Force -ErrorAction SilentlyContinue
+Remove-Item "$env:APPDATA\spicetify" -Recurse -Force -ErrorAction SilentlyContinue
+```
 
 ---
 
