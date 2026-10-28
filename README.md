@@ -55,12 +55,17 @@
 
 ## Prasyarat
 
-Pastikan aplikasi Spotify yang terpasang di komputer Anda adalah **Spotify Desktop resmi**, bukan versi dari Microsoft Store.
+Tema NeoVibe didesain dan dioptimalkan secara presisi untuk **Spotify Desktop v1.2.77.358 (LTS)**:
 
-- **Pemeriksaan Versi:** Buka Spotify -> klik menu titik tiga di pojok kiri atas -> **Help** -> **About Spotify**.
-- **Pengguna Microsoft Store:** Versi dari Microsoft Store dibatasi oleh sistem izin sandboxing Windows sehingga Spicetify tidak dapat memodifikasi berkasnya. Jika terpasang versi Microsoft Store:
-  1. Hapus instalasi (*uninstall*) Spotify versi Microsoft Store.
-  2. Unduh dan pasang versi resmi desktop melalui situs resmi: [spotify.com/download](https://www.spotify.com/download).
+- **Wajib Menggunakan Spotify v1.2.77.358 (LTS)**:
+  - Versi terbaru Spotify (v1.3.x+) sering merombak struktur antarmuka internal (DOM/XPUI) secara drastis sehingga merusak penataan tata letak tema modifikasi.
+  - Versi `1.2.77.358` adalah versi LTS yang terbukti paling stabil, bebas bug, dan kompatibel 100% dengan Spicetify.
+- **Otomatis Melalui Instalasi Cepat (Direkomendasikan)**:
+  - Anda **tidak perlu repot mencari atau memasang manual**. Jika menggunakan [Instalasi Cepat](#instalasi-cepat-pengguna-awam), skrip akan otomatis mendeteksi versi Spotify Anda, mengunduh installer resmi `Spotify_1.2.77.358.exe`, memasangnya, dan mengunci pembaruan otomatis Spotify agar tema awet permanen.
+- **Bagi Pengguna Instalasi Manual**:
+  - Jika ingin memasang secara manual, Anda wajib mengunduh installer resmi versi ini terlebih dahulu:
+    👉 [Unduh Spotify v1.2.77.358 LTS Installer (120 MB)](https://github.com/ogiwarasuha/NeoVibe/releases/download/v1.0.0/Spotify_1.2.77.358.exe) (atau melalui tab [GitHub Releases](https://github.com/ogiwarasuha/NeoVibe/releases)).
+  - **Penting:** Jangan menggunakan versi dari Microsoft Store dan jangan mengunduh dari situs umum `spotify.com` (karena installer online di sana otomatis memasang versi terbaru yang tidak stabil untuk tema).
 
 ---
 
@@ -76,7 +81,11 @@ Bagi Anda yang menginginkan proses instalasi otomatis tanpa perlu menyalin berka
 iwr -useb https://raw.githubusercontent.com/ogiwarasuha/NeoVibe/main/install.ps1 | iex
 ```
 
-Skrip ini akan secara otomatis mendeteksi dan memasang Spicetify jika belum ada, mengunduh tema NeoVibe, dan langsung menerapkannya ke Spotify Anda.
+*Skrip ini bekerja secara All-In-One:*
+- Memeriksa versi Spotify (otomatis unduh & pasang Spotify v1.2.77.358 LTS jika belum terpasang).
+- Mengunci pembaruan otomatis Spotify secara permanen agar tema tidak rusak.
+- Memasang Spicetify CLI secara otomatis tanpa prompt interaktif.
+- Mengunduh dan menerapkan tema NeoVibe langsung ke Spotify Anda.
 
 ### Pilihan 2: Unduh Berkas Installer Otomatis
 1. [Unduh Berkas install.bat](https://raw.githubusercontent.com/ogiwarasuha/NeoVibe/main/install.bat)
@@ -236,15 +245,11 @@ Remove-Item "$env:APPDATA\spicetify" -Recurse -Force -ErrorAction SilentlyContin
 
 ## Penyelesaian Masalah (FAQ)
 
-#### Spotify baru saja diperbarui otomatis dan tampilan tema hilang?
-Setiap pembaruan aplikasi Spotify akan me-reset berkas internal client. Jalankan kembali perintah berikut di PowerShell:
-```powershell
-spicetify backup apply
-```
-Tema NeoVibe beserta seluruh fitur ekstensinya akan langsung aktif kembali.
+#### Apakah pembaruan otomatis Spotify dapat merusak tema?
+Secara default, Spotify sering memperbarui versinya di latar belakang. Namun, jika Anda memasang tema ini menggunakan skrip otomatis `install.ps1` atau `install.bat`, pembaruan otomatis Spotify sudah dikunci secara permanen. Jika suatu saat Spotify Anda tidak sengaja terbarui kembali ke versi baru, cukup jalankan kembali `install.ps1` untuk mengembalikan ke versi 1.2.77.358 LTS yang stabil.
 
 #### Muncul galat `Spotify path is not valid` saat menjalankan perintah?
-Hal ini umumnya terjadi jika Spotify terpasang dari Microsoft Store. Hapus versi tersebut dan pasang versi desktop installer dari [spotify.com/download](https://www.spotify.com/download).
+Hal ini umumnya terjadi jika Spotify terpasang dari Microsoft Store. Hapus versi tersebut dan pasang installer resmi Spotify v1.2.77.358 dari [GitHub Releases NeoVibe](https://github.com/ogiwarasuha/NeoVibe/releases/download/v1.0.0/Spotify_1.2.77.358.exe).
 
 #### Bagaimana cara mengembalikan Spotify ke tampilan bawaan (uninstall tema)?
 Untuk mengembalikan Spotify ke kondisi default, jalankan perintah:
