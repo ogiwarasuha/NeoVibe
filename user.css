@@ -538,7 +538,6 @@ button[data-testid="control-button-playpause"] svg {
 .main-globalNav-navLink,
 .main-globalNav-link-icon,
 .main-topBar-buddyFeed,
-.main-userWidget-box,
 button[aria-label="Home"],
 button[aria-label="Beranda"],
 button[aria-label="Marketplace"] {
@@ -1775,3 +1774,166 @@ body,
   transition: background-color 0.4s ease, border-color 0.4s ease, color 0.4s ease !important;
 }
 
+
+
+/* =========================================================
+   SPOTIFY 1.3.6+ MODERN XPUI COMPATIBILITY & FIXES
+   ========================================================= */
+
+/* 1. Perbaikan Foto Profil di Bar Navigasi Atas (Hilangkan Kotak Putih & Jadikan Foto Kotak Rapi) */
+.main-userWidget-box,
+button[data-testid="user-widget-link"],
+.main-globalNav-contentRight button:has(figure),
+.main-globalNav-contentRight button:has(img) {
+  background: transparent !important;
+  background-color: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+.main-userWidget-box figure,
+.main-userWidget-box img,
+button[data-testid="user-widget-link"] figure,
+button[data-testid="user-widget-link"] img,
+.main-globalNav-contentRight figure,
+.main-globalNav-contentRight figure img,
+.main-globalNav-contentRight img {
+  border: var(--brutal-border-thin) !important;
+  box-shadow: 2px 2px 0px var(--spice-shadow) !important;
+  border-radius: 0px !important;
+  width: 32px !important;
+  height: 32px !important;
+  object-fit: cover !important;
+  background-color: var(--spice-card) !important;
+  overflow: hidden !important;
+  display: block !important;
+}
+
+/* 2. Hilangkan Gradasi Gelap Home Header yang Menabrak Warna Tema */
+.kMaYBahSBLOnErF7DLR2,
+div[class*="kMaYBah"],
+.xCEkyVpabf3oVGmFQVej,
+div[class*="xCEkyVpabf"],
+.main-home-homeHeader,
+.main-entityHeader-overlay,
+.under-main-view,
+.under-main-view div {
+  display: none !important;
+  background: transparent !important;
+  background-image: none !important;
+  opacity: 0 !important;
+}
+
+.jTuahgNncRCCfJfiJwQi,
+div[class*="jTuahgNnc"],
+.Yt3NCcQ9MNQ6msx88cPe,
+div[class*="Yt3NCc"] {
+  background: transparent !important;
+  background-color: transparent !important;
+}
+
+/* 3. Sidebar Kanan & DWP Panel Section (Tema Neo-Brutalism Penuh) */
+.Root__right-sidebar,
+.Root__right-sidebar aside,
+.Root__right-sidebar section,
+.Root__right-sidebar [data-testid="panel-container"],
+.Root__right-sidebar [data-testid="now-playing-widget"],
+aside[aria-label*="Now playing"],
+aside[aria-label*="Sedang diputar"],
+aside[aria-label*="Right sidebar"],
+#Desktop_RightSidebar_Id,
+.NowPlayingView {
+  background-color: var(--spice-sidebar) !important;
+  color: var(--spice-text) !important;
+  border-radius: 0px !important;
+  border-left: var(--brutal-border) !important;
+}
+
+/* Kartu di Sidebar Kanan (Preview Lirik, Tentang Artis, Queue, Credits) */
+.Root__right-sidebar [class*="F8ysIAxy"],
+.Root__right-sidebar .F8ysIAxyph0ZFOf51Aea,
+.Root__right-sidebar [data-testid*="panel-section"],
+.Root__right-sidebar [class*="panel-section"],
+.Root__right-sidebar div:has(> [data-testid*="lyrics"]),
+.Root__right-sidebar .main-nowPlayingView-section,
+.Root__right-sidebar .main-nowPlayingView-aboutArtistV2,
+.Root__right-sidebar div[style*="--lyrics-color-background"] {
+  background-color: var(--spice-card) !important;
+  color: var(--spice-text) !important;
+  border: var(--brutal-border-thin) !important;
+  box-shadow: 3px 3px 0px var(--spice-shadow) !important;
+  border-radius: 0px !important;
+  --lyrics-color-background: var(--spice-card) !important;
+  --lyrics-color-active: var(--spice-button-active) !important;
+  --lyrics-color-inactive: var(--spice-subtext) !important;
+  --lyrics-color-passed: var(--spice-subtext) !important;
+}
+
+.Root__right-sidebar h1,
+.Root__right-sidebar h2,
+.Root__right-sidebar h3,
+.Root__right-sidebar h4,
+.Root__right-sidebar p,
+.Root__right-sidebar span,
+.Root__right-sidebar a,
+.Root__right-sidebar div {
+  color: var(--spice-text) !important;
+}
+
+/* 4. Kartu Album & Sampul Musik Full Kotak (0px Radius) */
+.main-card-card,
+.main-card-card *,
+.main-cardImage-imageWrapper,
+.main-cardImage-imageWrapper *,
+.main-cardImage-image,
+.main-card-imageContainer,
+.main-card-imageContainer *,
+div[data-encore-id="card"],
+div[data-encore-id="card"] * {
+  border-radius: 0px !important;
+}
+
+.main-card-card,
+div[data-encore-id="card"] {
+  background-color: var(--spice-card) !important;
+  border: var(--brutal-border) !important;
+  border-radius: 0px !important;
+  box-shadow: var(--brutal-shadow) !important;
+  transition: transform 0.12s ease, box-shadow 0.12s ease, background-color 0.12s ease !important;
+}
+
+.main-card-card:hover,
+div[data-encore-id="card"]:hover {
+  background-color: var(--spice-highlight) !important;
+  transform: translate(2px, 2px) !important;
+  box-shadow: var(--brutal-shadow-hover) !important;
+}
+
+/* 5. Penyesuaian Responsif Layar Laptop (<1080p / 1366x768 / Scaling) */
+@media (max-width: 1366px), (max-height: 800px) {
+  .Root__globalNav {
+    padding-inline: 4px !important;
+  }
+  
+  .main-globalNav-contentRight {
+    gap: 6px !important;
+  }
+  
+  #neovibe-scheme-container {
+    margin-right: 4px !important;
+  }
+
+  .main-view-container__scroll-node-child {
+    padding-bottom: 24px !important;
+  }
+
+  :root {
+    --brutal-shadow: 3px 3px 0px var(--spice-shadow);
+    --brutal-shadow-sm: 2px 2px 0px var(--spice-shadow);
+  }
+}
