@@ -197,9 +197,16 @@ if (!(Test-Path $prefsFile)) {
 Stop-Process -Name Spotify, SpotifyUpdate -Force -ErrorAction SilentlyContinue
 Start-Sleep -Seconds 1
 
-# Bersihkan backup lama jika versi spotify berganti, lalu apply
-& $spicetifyCmd clear
-& $spicetifyCmd backup apply
+# Terapkan konfigurasi tema ke Spotify
+$oldPref = $ErrorActionPreference
+$ErrorActionPreference = "Continue"
+
+& $spicetifyCmd apply
+if ($LASTEXITCODE -ne 0) {
+    & $spicetifyCmd backup apply
+}
+
+$ErrorActionPreference = $oldPref
 
 Write-Host "`n========================================================" -ForegroundColor Green
 Write-Host " Sukses! Spotify v$targetVersion + Tema NeoVibe Berhasil!" -ForegroundColor Green
