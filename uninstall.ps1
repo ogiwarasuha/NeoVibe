@@ -57,3 +57,4 @@ if (Test-Path $browserCache) {
 Write-Host "`n========================================================" -ForegroundColor Green
 Write-Host " Sukses! Spotify telah bersih kembali ke kondisi original." -ForegroundColor Green
 Write-Host "========================================================`n" -ForegroundColor Green
+
