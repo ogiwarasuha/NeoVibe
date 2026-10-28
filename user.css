@@ -1,0 +1,1777 @@
+/* =========================================================
+   VARIABEL UTAMA & NEOBRUTALISM (FULL KOTAK / BOXY)
+   ========================================================= */
+:root {
+  --border-radius-1: 0px;
+  /* Play Bar */
+  --margin-bottom-now-playing-bar: 0.5rem;
+  --now-playing-bar-height: 5.625rem;
+  --padding-now-playing-bar: 0.25rem;
+  --border-radius-now-playing-bar: 0px;
+
+  /* Variabel Khusus Neobrutalism (0px = Kotak Tegas) */
+  --brutal-border: 2.5px solid var(--spice-shadow);
+  --brutal-border-thin: 2px solid var(--spice-shadow);
+  --brutal-shadow: 4px 4px 0px var(--spice-shadow);
+  --brutal-shadow-sm: 3px 3px 0px var(--spice-shadow);
+  --brutal-shadow-hover: 2px 2px 0px var(--spice-shadow);
+  --brutal-radius: 0px;
+
+  /* Override Corner Radius Spotify Encore menjadi FULL KOTAK (0px) */
+  --encore-button-corner-radius: 0px !important;
+  --encore-border-radius-rounded: 0px !important;
+  --encore-control-border-radius: 0px !important;
+  --encore-chip-corner-radius: 0px !important;
+  --encore-corner-radius-full: 0px !important;
+  --encore-corner-radius-pill: 0px !important;
+  --encore-corner-radius-smaller: 0px !important;
+  --encore-corner-radius-base: 0px !important;
+  --encore-corner-radius-larger: 0px !important;
+  --encore-corner-radius-larger-2: 0px !important;
+  --encore-corner-radius-larger-3: 0px !important;
+  --corner-radius: 0px !important;
+}
+
+/* =========================================================
+   PERBAIKAN DARK THEME BAWAAN SPOTIFY (ENCORE)
+   ========================================================= */
+.encore-dark-theme,
+.encore-dark-theme .encore-base-set,
+.encore-light-theme,
+.encore-light-theme .encore-base-set,
+.encore-over-media-set {
+  --background-base: var(--spice-main) !important;
+  --background-highlight: var(--spice-main-elevated) !important;
+  --background-press: var(--spice-highlight) !important;
+  --background-elevated-base: var(--spice-card) !important;
+  --background-elevated-highlight: var(--spice-highlight) !important;
+  --background-elevated-press: var(--spice-highlight-elevated) !important;
+  --background-tinted-base: var(--spice-main-elevated) !important;
+  --background-tinted-highlight: var(--spice-highlight) !important;
+  --background-tinted-press: var(--spice-selected-row) !important;
+  --text-base: var(--spice-text) !important;
+  --text-subdued: var(--spice-subtext) !important;
+  --decorative-base: var(--spice-text) !important;
+  --decorative-subdued: var(--spice-subtext) !important;
+
+  /* Override Corner Radius Spotify Encore di semua theme */
+  --encore-button-corner-radius: 0px !important;
+  --encore-border-radius-rounded: 0px !important;
+  --encore-control-border-radius: 0px !important;
+  --encore-chip-corner-radius: 0px !important;
+  --encore-corner-radius-full: 0px !important;
+  --encore-corner-radius-pill: 0px !important;
+  --encore-corner-radius-smaller: 0px !important;
+  --encore-corner-radius-base: 0px !important;
+  --encore-corner-radius-larger: 0px !important;
+  --encore-corner-radius-larger-2: 0px !important;
+  --encore-corner-radius-larger-3: 0px !important;
+  --corner-radius: 0px !important;
+}
+
+/* Global full kotak untuk seluruh tombol Encore, Chip, dan elemen dalamnya */
+button,
+button *,
+button::before,
+button::after,
+[data-encore-id*="button"],
+[data-encore-id*="button"] *,
+[data-encore-id*="button"]::before,
+[data-encore-id*="button"]::after,
+[data-encore-id*="chip"],
+[data-encore-id*="chip"] *,
+[data-encore-id*="chip"]::before,
+[data-encore-id*="chip"]::after,
+.e-91000-button,
+.e-91000-button *,
+.e-91000-button::before,
+.e-91000-button::after,
+[class*="ButtonInner"],
+[class*="ButtonInner"] *,
+[class*="ButtonInner"]::before,
+[class*="ButtonInner"]::after,
+[class*="ChipInner"],
+[class*="ChipInner"] *,
+[class*="ChipInner"]::before,
+[class*="ChipInner"]::after,
+.UCyimCp8rEfL5nB8paBu,
+.UCyimCp8rEfL5nB8paBu *,
+.UCyimCp8rEfL5nB8paBu::before,
+.UCyimCp8rEfL5nB8paBu::after,
+button[role="checkbox"],
+button[role="checkbox"] *,
+button[role="checkbox"]::before,
+button[role="checkbox"]::after {
+  border-radius: 0px !important;
+}
+
+/* =========================================================
+   FIX 1: KARTU "TENTANG ARTIS" (FOTO MUNCUL) & TOMBOL "IKUTI"
+   ========================================================= */
+.Root__right-sidebar,
+.Root__right-sidebar aside,
+.Root__right-sidebar section,
+.main-nowPlayingView-section,
+.main-nowPlayingView-content,
+.main-nowPlayingView-contextItemInfo,
+.main-nowPlayingView-aboutArtistV2,
+.main-nowPlayingView-lyricsContent,
+.NowPlayingView {
+  background-color: var(--spice-sidebar) !important;
+  color: var(--spice-text) !important;
+  border-radius: 0px !important;
+}
+
+/* Kotak Kartu di Sidebar Kanan (Tentang Artis, Lirik, Credits, Queue) */
+.Root__right-sidebar .main-nowPlayingView-section,
+.Root__right-sidebar div[style*="--lyrics-color-background"],
+.Root__right-sidebar div[class*="lyrics"] {
+  background-color: var(--spice-card) !important;
+  border: none !important;
+  border-radius: 0px !important;
+  box-shadow: none !important;
+  color: var(--spice-text) !important;
+  --lyrics-color-background: var(--spice-card) !important;
+  --lyrics-color-active: var(--spice-button-active) !important;
+  --lyrics-color-inactive: var(--spice-subtext) !important;
+  --lyrics-color-passed: var(--spice-subtext) !important;
+}
+
+/* Memastikan Foto Artis di kartu "Tentang artis" MUNCUL & punya garis tepi bawah */
+.main-nowPlayingView-aboutArtistV2ImageContainer,
+.main-nowPlayingView-aboutArtistV2Image {
+  border-radius: 0px !important;
+  border-bottom: var(--brutal-border-thin) !important;
+}
+
+/* Hanya menghilangkan gradasi hitam di atas foto artis (TANPA menghapus foto background-image) */
+.main-nowPlayingView-aboutArtistV2ImageContainer > div[style*="linear-gradient"] {
+  background: transparent !important;
+  background-image: none !important;
+}
+
+/* Menjadikan tulisan "Tentang artis" di atas foto punya kotak label agar terbaca jelas */
+.main-nowPlayingView-aboutArtistV2 h2,
+.main-nowPlayingView-sectionHeaderText {
+  background-color: var(--spice-card) !important;
+  color: var(--spice-text) !important;
+  border: none !important;
+  box-shadow: none !important;
+  padding: 2px 8px !important;
+  display: inline-block !important;
+  font-weight: 800 !important;
+}
+
+/* Memperbaiki teks pendengar bulanan ("10.272.111 pendengar bulanan") & nama artis yang pudar */
+.Root__right-sidebar a,
+.Root__right-sidebar span,
+.Root__right-sidebar p,
+.Root__right-sidebar div,
+.main-nowPlayingView-contextItemInfo a,
+.main-nowPlayingView-contextItemInfo span,
+.main-nowPlayingView-artistBio {
+  color: var(--spice-text) !important;
+  -webkit-text-fill-color: var(--spice-text) !important;
+}
+
+/* Tombol di sidebar kanan: latar transparan sama kayak background */
+.Root__right-sidebar button,
+#Desktop_RightSidebar_Id button,
+.NowPlayingView button {
+  background: transparent !important;
+  background-color: transparent !important;
+  border: none !important;
+  border-radius: 0px !important;
+  box-shadow: none !important;
+  color: var(--spice-text) !important;
+  -webkit-text-fill-color: var(--spice-text) !important;
+  opacity: 1 !important;
+  transition: color 0.1s ease, background-color 0.1s ease !important;
+}
+
+.Root__right-sidebar button svg,
+.Root__right-sidebar button path,
+#Desktop_RightSidebar_Id button svg,
+#Desktop_RightSidebar_Id button path,
+.NowPlayingView button svg,
+.NowPlayingView button path {
+  fill: var(--spice-text) !important;
+  color: var(--spice-text) !important;
+}
+
+.Root__right-sidebar button:hover,
+#Desktop_RightSidebar_Id button:hover,
+.NowPlayingView button:hover {
+  background: transparent !important;
+  background-color: transparent !important;
+  transform: none !important;
+  box-shadow: none !important;
+  color: var(--spice-button-active) !important;
+  -webkit-text-fill-color: var(--spice-button-active) !important;
+}
+
+.Root__right-sidebar button:hover svg,
+.Root__right-sidebar button:hover path,
+#Desktop_RightSidebar_Id button:hover svg,
+#Desktop_RightSidebar_Id button:hover path,
+.NowPlayingView button:hover svg,
+.NowPlayingView button:hover path {
+  fill: var(--spice-button-active) !important;
+  color: var(--spice-button-active) !important;
+}
+
+/* =========================================================
+   FIX: NOW PLAYING VIEW (SIDEBAR KANAN) HEADER & TOMBOL AKSI
+   Memastikan tombol kiri atas, kanan atas, dan kanan bawah
+   selalu rapi, proporsional, dan seimbang baik sebelum (idle) maupun sesudah hover
+   ========================================================= */
+
+/* 1. Header Wrapper: Berikan gap seimbang di header panel Now Playing */
+.main-nowPlayingView-headerWrapper,
+.main-nowPlayingView-headerWrapper.iGRaSZDa1r0m21aF6oZq {
+  gap: 12px !important;
+}
+
+/* 2. Tombol Tutup Panel di Kiri Atas ([|>]) */
+.main-nowPlayingView-headerCloseButton,
+button.main-nowPlayingView-headerCloseButton {
+  opacity: 1 !important;
+  transform: translateX(0) !important;
+  visibility: visible !important;
+  pointer-events: auto !important;
+  transition: none !important;
+  margin-right: 4px !important;
+}
+
+/* 3. Judul Playlist / Konteks di Header (Mencegah bergeser -28px saat idle) */
+.main-nowPlayingView-headerTextWrapper,
+.Tksg0me7_NZleE3XZpr9 {
+  transform: translateX(0) !important;
+  margin-inline-start: 0 !important;
+  transition: none !important;
+}
+
+/* 4. Tombol Aksi Kanan Atas (··· opsi & ⤢ cinema mode) - selalu muncul rapi */
+.main-nowPlayingView-headerButtonWrapper,
+.main-nowPlayingView-headerButtonContainer {
+  opacity: 1 !important;
+  visibility: visible !important;
+  pointer-events: auto !important;
+  transition: none !important;
+}
+
+/* 5. Tombol Bagikan di Kanan Bawah ([↑] Share Button di samping tombol Tambah [+]) */
+.main-watchFeed-shareButtonHidden,
+button.main-watchFeed-shareButtonHidden {
+  opacity: 1 !important;
+  width: 24px !important;
+  min-width: 24px !important;
+  height: 24px !important;
+  margin-inline-start: 12px !important;
+  visibility: visible !important;
+  pointer-events: auto !important;
+  transition: none !important;
+}
+
+/* Penyelarasan Tombol Aksi Lagu Kanan Bawah (Share & Plus Button) */
+.main-nowPlayingView-contextItemInfo .main-nowPlayingWidget-plusButtonWrapper,
+.main-nowPlayingView-contextItemInfo .main-watchFeed-shareButtonHidden {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+/* Tombol "Ikuti" (Follow) di kartu artis & kredit: latar transparan dengan garis kotak neobrutalism (FULL KOTAK 0px) */
+.Root__right-sidebar .main-nowPlayingView-aboutArtistV2 button,
+.Root__right-sidebar .main-nowPlayingView-aboutArtistButton,
+.Root__right-sidebar button[data-encore-id="buttonSecondary"],
+.Root__right-sidebar .D9usxF1zgl5IhIR5CIjf button,
+#Desktop_RightSidebar_Id .main-nowPlayingView-aboutArtistV2 button,
+#Desktop_RightSidebar_Id .main-nowPlayingView-aboutArtistButton,
+#Desktop_RightSidebar_Id button[data-encore-id="buttonSecondary"],
+#Desktop_RightSidebar_Id .D9usxF1zgl5IhIR5CIjf button,
+.D9usxF1zgl5IhIR5CIjf button,
+button[data-encore-id="buttonSecondary"],
+button[aria-label*="Ikuti"],
+button[aria-label*="Follow"] {
+  background: transparent !important;
+  background-color: transparent !important;
+  color: var(--spice-text) !important;
+  -webkit-text-fill-color: var(--spice-text) !important;
+  border: var(--brutal-border-thin) !important;
+  border-radius: 0px !important;
+  box-shadow: none !important;
+  font-weight: 800 !important;
+  padding: 4px 14px !important;
+}
+
+.Root__right-sidebar .main-nowPlayingView-aboutArtistV2 button *,
+.Root__right-sidebar .main-nowPlayingView-aboutArtistButton *,
+.Root__right-sidebar button[data-encore-id="buttonSecondary"] *,
+.Root__right-sidebar .D9usxF1zgl5IhIR5CIjf button *,
+#Desktop_RightSidebar_Id .main-nowPlayingView-aboutArtistV2 button *,
+#Desktop_RightSidebar_Id .main-nowPlayingView-aboutArtistButton *,
+#Desktop_RightSidebar_Id button[data-encore-id="buttonSecondary"] *,
+#Desktop_RightSidebar_Id .D9usxF1zgl5IhIR5CIjf button *,
+.D9usxF1zgl5IhIR5CIjf button *,
+button[data-encore-id="buttonSecondary"] *,
+button[aria-label*="Ikuti"] *,
+button[aria-label*="Follow"] * {
+  border-radius: 0px !important;
+}
+
+.Root__right-sidebar button[data-encore-id="buttonSecondary"]::after,
+.Root__right-sidebar button[data-encore-id="buttonSecondary"]::before,
+.D9usxF1zgl5IhIR5CIjf button::after,
+.D9usxF1zgl5IhIR5CIjf button::before,
+button[data-encore-id="buttonSecondary"]::after,
+button[data-encore-id="buttonSecondary"]::before,
+button[aria-label*="Ikuti"]::after,
+button[aria-label*="Follow"]::after {
+  border-radius: 0px !important;
+  border-color: var(--spice-shadow) !important;
+}
+
+.Root__right-sidebar .main-nowPlayingView-aboutArtistV2 button:hover,
+.Root__right-sidebar .main-nowPlayingView-aboutArtistButton:hover,
+.Root__right-sidebar button[data-encore-id="buttonSecondary"]:hover,
+.Root__right-sidebar .D9usxF1zgl5IhIR5CIjf button:hover,
+#Desktop_RightSidebar_Id .main-nowPlayingView-aboutArtistV2 button:hover,
+#Desktop_RightSidebar_Id .main-nowPlayingView-aboutArtistButton:hover,
+#Desktop_RightSidebar_Id button[data-encore-id="buttonSecondary"]:hover,
+#Desktop_RightSidebar_Id .D9usxF1zgl5IhIR5CIjf button:hover,
+.D9usxF1zgl5IhIR5CIjf button:hover,
+button[data-encore-id="buttonSecondary"]:hover,
+button[aria-label*="Ikuti"]:hover,
+button[aria-label*="Follow"]:hover {
+  background-color: var(--spice-highlight) !important;
+  color: var(--spice-button-active) !important;
+  -webkit-text-fill-color: var(--spice-button-active) !important;
+  border-color: var(--spice-shadow) !important;
+}
+
+/* Tombol teks tautan header seperti "Tampilkan semua" & "Buka antrean" */
+.Root__right-sidebar .main-nowPlayingView-sectionHeader button,
+.Root__right-sidebar .main-nowPlayingView-section button[data-encore-id="buttonTertiary"],
+#Desktop_RightSidebar_Id .main-nowPlayingView-sectionHeader button,
+#Desktop_RightSidebar_Id .main-nowPlayingView-section button[data-encore-id="buttonTertiary"] {
+  background: transparent !important;
+  background-color: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+  color: var(--spice-text) !important;
+  -webkit-text-fill-color: var(--spice-text) !important;
+  font-weight: 800 !important;
+}
+
+.Root__right-sidebar .main-nowPlayingView-sectionHeader button:hover,
+.Root__right-sidebar .main-nowPlayingView-section button[data-encore-id="buttonTertiary"]:hover,
+#Desktop_RightSidebar_Id .main-nowPlayingView-sectionHeader button:hover,
+#Desktop_RightSidebar_Id .main-nowPlayingView-section button[data-encore-id="buttonTertiary"]:hover {
+  color: var(--spice-button-active) !important;
+  -webkit-text-fill-color: var(--spice-button-active) !important;
+}
+
+/* Menghilangkan background abu-abu transparan di belakang judul lagu ("Rahasia Hati") */
+.main-nowPlayingView-contextItemInfo,
+.main-nowPlayingView-contextItemInfo::before,
+.main-nowPlayingView-coverArtContainer div[style*="linear-gradient"] {
+  background: transparent !important;
+  background-color: transparent !important;
+  background-image: none !important;
+}
+
+/* =========================================================
+   FIX 2: DAFTAR PLAYLIST DI SIDEBAR KIRI JADI KOTAK NEOBRUTALISM
+   ========================================================= */
+/* Membuat setiap gambar/ikon playlist di sidebar kiri menjadi kotak bergaris tepi & bershadow */
+.main-yourLibraryX-listItem img,
+.main-yourLibraryX-listItemImage,
+.x-entityImage-imageContainer,
+.x-entityImage-imageContainer img,
+.x-entityImage-square,
+.x-entityImage-circle,
+li[role="listitem"] img,
+.Root__nav-bar img {
+  border-radius: 0px !important;
+  border: var(--brutal-border-thin) !important;
+  box-shadow: 3px 3px 0px var(--spice-shadow) !important;
+  transition: transform 0.1s ease, box-shadow 0.1s ease !important;
+}
+
+/* Saat ikon playlist di sidebar kiri disentuh kursor */
+.main-yourLibraryX-listItem:hover img,
+.x-entityImage-imageContainer:hover,
+li[role="listitem"]:hover img {
+  transform: translate(1.5px, 1.5px) !important;
+  box-shadow: 1.5px 1.5px 0px var(--spice-shadow) !important;
+}
+
+/* Kotak pembungkus item playlist di sidebar kiri */
+.main-yourLibraryX-listItem > div,
+li[role="listitem"] > div {
+  border-radius: 0px !important;
+}
+
+/* =========================================================
+   WARNA & TATA LETAK NAVIGASI BAR PALING ATAS
+   ========================================================= */
+/* Menyamakan warna bar navigasi paling atas */
+.Root__globalNav,
+.Root__top-container,
+.main-topBar-container,
+.main-globalNav-container,
+.CustomTitlebar,
+.titlebar-background {
+  background-color: var(--spice-sidebar) !important;
+}
+
+/* Meratakan navigasi ke ujung kiri dan ujung kanan penuh */
+.Root__globalNav {
+  padding-inline: 8px !important;
+  padding-left: 8px !important;
+  padding-right: 8px !important;
+}
+
+/* Foto 1: Pojokin tombol history (< dan >) ke paling kiri */
+.OPsY6bKl1_FfA8jFpq1V,
+.ZIgg4O2heaZyD8Z7o7MQ,
+.main-globalNav-historyButtonsWrapper > div:empty {
+  display: none !important;
+  width: 0px !important;
+}
+
+.main-globalNav-historyButtonsWrapper {
+  padding-inline-start: 4px !important;
+  padding-left: 4px !important;
+  margin-inline-start: 0 !important;
+  margin-left: 0 !important;
+  gap: 8px !important;
+}
+
+/* Foto 2: Pojokin profil, notifikasi, dan teman ke paling kanan */
+.main-globalNav-contentRightSpacer {
+  display: none !important;
+  width: 0px !important;
+  height: 0px !important;
+}
+
+.main-globalNav-contentRight {
+  padding-inline-end: 4px !important;
+  padding-right: 4px !important;
+  margin-inline-end: 0 !important;
+  margin-right: 0 !important;
+  gap: 10px !important;
+}
+
+/* =========================================================
+   TOMBOL REPEAT / SHUFFLE TANPA SHADOW & PLAY KOTAK
+   ========================================================= */
+.main-nowPlayingBar-container button:not(.main-playPauseButton-button):not([data-testid="control-button-playpause"]),
+.main-nowPlayingBar-container button:not(.main-playPauseButton-button):not([data-testid="control-button-playpause"]) > span,
+.player-controls__buttons button:not(.main-playPauseButton-button):not([data-testid="control-button-playpause"]),
+.player-controls__buttons button:not(.main-playPauseButton-button):not([data-testid="control-button-playpause"]) > span {
+  background: transparent !important;
+  background-color: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  border-radius: 0px !important;
+  color: var(--spice-text) !important;
+  opacity: 1 !important;
+  transform: none !important;
+}
+
+button[data-testid="control-button-shuffle"][aria-checked="true"],
+button[data-testid="control-button-repeat"][aria-checked="true"],
+button[data-testid="control-button-repeat"][aria-checked="mixed"],
+button[data-testid="control-button-shuffle"][aria-checked="true"] svg,
+button[data-testid="control-button-repeat"][aria-checked="true"] svg,
+button[data-testid="control-button-repeat"][aria-checked="mixed"] svg,
+.main-repeatButton-button.main-repeatButton-active,
+.main-shuffleButton-button.main-shuffleButton-active {
+  color: var(--spice-button-active) !important;
+  fill: var(--spice-button-active) !important;
+}
+
+.main-playPauseButton-button,
+button[data-testid="control-button-playpause"] {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+}
+
+.main-playPauseButton-button > span,
+button[data-testid="control-button-playpause"] > span {
+  background-color: var(--spice-button) !important;
+  color: var(--spice-shadow) !important;
+  border: var(--brutal-border-thin) !important;
+  border-radius: 0px !important;
+  box-shadow: 3px 3px 0px var(--spice-shadow) !important;
+  width: 36px !important;
+  height: 36px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  transition: transform 0.1s ease, box-shadow 0.1s ease !important;
+}
+
+.main-playPauseButton-button:hover > span,
+button[data-testid="control-button-playpause"]:hover > span {
+  background-color: var(--spice-button-active) !important;
+  transform: translate(1.5px, 1.5px) !important;
+  box-shadow: 1.5px 1.5px 0px var(--spice-shadow) !important;
+}
+
+.main-playPauseButton-button svg,
+button[data-testid="control-button-playpause"] svg {
+  fill: var(--spice-shadow) !important;
+  color: var(--spice-shadow) !important;
+  height: 20px !important;
+  width: 20px !important;
+}
+
+/* =========================================================
+   TOMBOL NAVIGASI ATAS (KERANJANG, HOME, PROFIL)
+   ========================================================= */
+.main-globalNav-navLink,
+.main-globalNav-link-icon,
+.main-topBar-buddyFeed,
+.main-userWidget-box,
+button[aria-label="Home"],
+button[aria-label="Beranda"],
+button[aria-label="Marketplace"] {
+  background-color: var(--spice-card) !important;
+  color: var(--spice-text) !important;
+  border: var(--brutal-border-thin) !important;
+  border-radius: 0px !important;
+  box-shadow: 2px 2px 0px var(--spice-shadow) !important;
+}
+
+/* Tombol History (< dan >) agar berbentuk kotak rapi & terpisah */
+.main-globalNav-historyButtons button {
+  width: 32px !important;
+  height: 32px !important;
+  min-width: 32px !important;
+  min-height: 32px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  margin-right: 6px !important;
+  background-color: var(--spice-card) !important;
+  color: var(--spice-text) !important;
+  border: var(--brutal-border-thin) !important;
+  border-radius: 0px !important;
+  box-shadow: 2px 2px 0px var(--spice-shadow) !important;
+  padding: 0 !important;
+}
+
+.main-globalNav-historyButtons button[disabled] {
+  opacity: 0.4 !important;
+  box-shadow: none !important;
+}
+
+/* Membuat foto profil di dalam tombol pojok kanan atas ikut menjadi kotak */
+.main-userWidget-box img,
+.main-userWidget-box figure,
+.main-userWidget-box div,
+.main-globalNav-navLink > * {
+  border-radius: 0px !important;
+}
+
+.main-globalNav-navLink:hover {
+  background-color: var(--spice-highlight) !important;
+  transform: translate(1px, 1px) !important;
+  box-shadow: 1px 1px 0px var(--spice-shadow) !important;
+}
+
+/* =========================================================
+   MARKETPLACE NEOBRUTALISM (FULL KOTAK & BORDER TEGAS)
+   ========================================================= */
+.marketplace-tabBar-headerItemLink {
+  border: var(--brutal-border-thin) !important;
+  border-radius: 0px !important;
+  box-shadow: 2px 2px 0px var(--spice-shadow) !important;
+  background-color: var(--spice-card) !important;
+  color: var(--spice-text) !important;
+  font-weight: 800 !important;
+  margin-right: 8px !important;
+  padding: 6px 16px !important;
+  display: inline-block !important;
+  transition: transform 0.1s ease, box-shadow 0.1s ease !important;
+}
+
+.marketplace-tabBar-headerItemLink:hover {
+  background-color: var(--spice-highlight) !important;
+  transform: translate(1px, 1px) !important;
+  box-shadow: 1px 1px 0px var(--spice-shadow) !important;
+}
+
+.marketplace-tabBar-active,
+.marketplace-tabBar-headerItemLink.marketplace-tabBar-active {
+  background-color: var(--spice-button) !important;
+  color: #ffffff !important;
+  border: var(--brutal-border-thin) !important;
+  border-radius: 0px !important;
+  box-shadow: 2px 2px 0px var(--spice-shadow) !important;
+}
+
+.marketplace-tabBar-headerItem .optionsMenu-dropBox,
+.marketplace-sort-bar select,
+.marketplace-sort-container select,
+.marketplace-sort-container button,
+.marketplace-sortBox {
+  border: var(--brutal-border-thin) !important;
+  border-radius: 0px !important;
+  box-shadow: 2px 2px 0px var(--spice-shadow) !important;
+  background-color: var(--spice-card) !important;
+  color: var(--spice-text) !important;
+  font-weight: 700 !important;
+  padding: 6px 14px !important;
+}
+
+.searchbar-bar,
+.searchbar--bar__wrapper input {
+  border: var(--brutal-border-thin) !important;
+  border-radius: 0px !important;
+  box-shadow: 2px 2px 0px var(--spice-shadow) !important;
+  background-color: var(--spice-card) !important;
+  color: var(--spice-text) !important;
+  font-weight: 700 !important;
+}
+
+.marketplace-card {
+  border: var(--brutal-border) !important;
+  border-radius: 0px !important;
+  box-shadow: var(--brutal-shadow) !important;
+  background-color: var(--spice-card) !important;
+}
+
+.marketplace-installButton,
+.button-module__button___hf2qg_marketplace {
+  border: var(--brutal-border-thin) !important;
+  border-radius: 0px !important;
+  box-shadow: 2px 2px 0px var(--spice-shadow) !important;
+  background-color: var(--spice-button) !important;
+  color: #ffffff !important;
+  font-weight: 800 !important;
+}
+
+/* =========================================================
+   TOMBOL FILTER "SEMUA / MUSIK" KHUSUS DI HALAMAN UTAMA
+   ========================================================= */
+.main-home-filterChipsContainer,
+.main-home-filterChipsSection,
+.under-main-view,
+.under-main-view div,
+.main-entityHeader-overlay,
+.main-home-homeHeader {
+  background: var(--spice-main) !important;
+  background-color: var(--spice-main) !important;
+  background-image: none !important;
+}
+
+/* Berikan jarak/gap antar tombol filter chip di home agar tidak dempet/rapat */
+.main-home-filterChipsContainer .u_wTfCtgm9HvxrphUxKd,
+.main-home-filterChipsContainer [class*="Chips"],
+.u_wTfCtgm9HvxrphUxKd {
+  display: flex !important;
+  gap: 12px !important;
+  align-items: center !important;
+}
+
+/* Hilangkan margin negatif (-48px) bawaan Spotify pada subchip (Musik & Mengikuti) */
+.main-home-filterChipsContainer .u_wTfCtgm9HvxrphUxKd > *,
+.u_wTfCtgm9HvxrphUxKd > *,
+.uMoqkRWisfbVwPoJgD6N,
+div[class*="uMoqkRWisfbVwPoJgD6N"],
+.main-home-filterChipsContainer [class*="uMoqkRWisfbVwPoJgD6N"] {
+  margin: 0 !important;
+  margin-inline-start: 0 !important;
+  margin-inline-end: 0 !important;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+  position: relative !important;
+}
+
+/* Reset padding ekstra (48px) bawaan Spotify pada subchip */
+._InSnCH8a86O1YanzEDZ,
+button[class*="_InSnCH8a86O1YanzEDZ"],
+[class*="_InSnCH8a86O1YanzEDZ"],
+.main-home-filterChipsContainer [class*="_InSnCH8a86O1YanzEDZ"] {
+  padding-inline-start: 14px !important;
+  padding-left: 14px !important;
+}
+
+.C_NwdzvzxJ6j5ONOY0Pm,
+[class*="C_NwdzvzxJ6j5ONOY0Pm"] {
+  background: transparent !important;
+  background-image: none !important;
+}
+
+/* Styling tombol Chip Home: Neobrutalism Kotak Berjarak 12px */
+.main-home-filterChipsContainer button,
+.Root__main-view button[role="checkbox"],
+.Root__main-view [data-encore-id="chip"],
+.u_wTfCtgm9HvxrphUxKd button {
+  border: var(--brutal-border-thin) !important;
+  box-shadow: var(--brutal-shadow-sm) !important;
+  border-radius: 0px !important;
+  background-color: var(--spice-card) !important;
+  color: var(--spice-text) !important;
+  font-weight: 800 !important;
+  padding: 4px 14px !important;
+  margin: 0 !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  transition: transform 0.1s ease, box-shadow 0.1s ease !important;
+}
+
+.main-home-filterChipsContainer button > span,
+.Root__main-view button[role="checkbox"] > span,
+.Root__main-view [data-encore-id="chip"] > span,
+.u_wTfCtgm9HvxrphUxKd button > span {
+  border: none !important;
+  box-shadow: none !important;
+  background: transparent !important;
+  padding: 0 !important;
+  color: inherit !important;
+  border-radius: 0px !important;
+}
+
+/* Chip yang aktif / terpilih (Warna Coral Merah/Oranye) */
+.main-home-filterChipsContainer button[aria-checked="true"],
+.main-home-filterChipsContainer button[aria-selected="true"],
+.Root__main-view button[role="checkbox"][aria-checked="true"],
+.Root__main-view button[role="checkbox"][aria-selected="true"],
+.Root__main-view [data-encore-id="chip"][aria-checked="true"],
+.u_wTfCtgm9HvxrphUxKd button[aria-checked="true"] {
+  background-color: var(--spice-button) !important;
+  color: #ffffff !important;
+}
+
+/* Chip saat di-hover */
+.main-home-filterChipsContainer button:hover,
+.Root__main-view button[role="checkbox"]:hover,
+.Root__main-view [data-encore-id="chip"]:hover,
+.u_wTfCtgm9HvxrphUxKd button:hover {
+  transform: translate(1px, 1px) !important;
+  box-shadow: 1.5px 1.5px 0px var(--spice-shadow) !important;
+}
+
+/* =========================================================
+   IKON KANAN BAWAH
+   ========================================================= */
+.main-nowPlayingBar-right button,
+.main-nowPlayingBar-right .control-button,
+.main-nowPlayingBar-extraControls button,
+.main-nowPlayingBar-right button[disabled],
+.main-nowPlayingBar-extraControls button[disabled] {
+  color: var(--spice-text) !important;
+  opacity: 1 !important;
+  -webkit-text-fill-color: var(--spice-text) !important;
+}
+
+.main-nowPlayingBar-right button svg,
+.main-nowPlayingBar-extraControls button svg,
+.main-nowPlayingBar-right button path,
+.main-nowPlayingBar-extraControls button path {
+  fill: var(--spice-text) !important;
+  stroke: var(--spice-text) !important;
+  opacity: 1 !important;
+}
+
+.main-nowPlayingBar-right button:hover svg,
+.main-nowPlayingBar-right button:hover path {
+  fill: var(--spice-button-active) !important;
+  stroke: var(--spice-button-active) !important;
+}
+
+/* =========================================================
+   LIRIK TEMA NEOBRUTALISM (HALAMAN PENUH)
+   ========================================================= */
+.lyrics-lyrics-container,
+.lyrics-lyrics-background,
+div[data-testid="lyrics-page"] {
+  --lyrics-color-background: var(--spice-main-elevated) !important;
+  --lyrics-color-active: var(--spice-text) !important;
+  --lyrics-color-inactive: var(--spice-subtext) !important;
+  --lyrics-color-passed: var(--spice-subtext) !important;
+  --lyrics-color-messaging: var(--spice-text) !important;
+  background-color: var(--spice-main-elevated) !important;
+  background-image: none !important;
+}
+
+.lyrics-lyricsContent-lyric {
+  color: var(--spice-subtext) !important;
+  font-weight: 700 !important;
+  padding: 8px 14px !important;
+  margin: 8px 0 !important;
+  border: 2px solid transparent !important;
+  border-radius: 0px !important;
+  transition: all 0.12s ease !important;
+}
+
+.lyrics-lyricsContent-lyric:hover {
+  color: var(--spice-text) !important;
+  background-color: var(--spice-highlight) !important;
+  border: var(--brutal-border-thin) !important;
+  box-shadow: 2px 2px 0px var(--spice-shadow) !important;
+}
+
+.lyrics-lyricsContent-active,
+.lyrics-lyricsContent-lyric.lyrics-lyricsContent-active {
+  background-color: var(--spice-button) !important;
+  color: #ffffff !important;
+  --lyrics-color-active: #ffffff !important;
+  border: var(--brutal-border) !important;
+  box-shadow: var(--brutal-shadow) !important;
+  border-radius: 0px !important;
+  transform: translate(-2px, -2px) !important;
+}
+
+.lyrics-lyricsContent-active a,
+.lyrics-lyricsContent-active span {
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+}
+
+/* =========================================================
+   SCROLLBAR RAMPING
+   ========================================================= */
+.os-scrollbar-vertical {
+  width: 6px !important;
+  padding: 0 !important;
+}
+
+.os-scrollbar-track {
+  width: 6px !important;
+  background: transparent !important;
+}
+
+.os-scrollbar-handle,
+.os-theme-spotify.os-host-transition
+  > .os-scrollbar-vertical
+  > .os-scrollbar-track
+  > .os-scrollbar-handle {
+  background: var(--spice-button) !important;
+  border: 1px solid var(--spice-shadow) !important;
+  border-radius: 0px !important;
+  width: 4px !important;
+  max-width: 4px !important;
+  margin-left: auto !important;
+}
+
+/* =========================================================
+   EFEK PANEL & KARTU NEOBRUTALISM (FULL KOTAK)
+   ========================================================= */
+.Root__main-view,
+.Root__nav-bar .main-yourLibraryX-entryPoints,
+.Root__right-sidebar aside {
+  border: var(--brutal-border) !important;
+  border-radius: 0px !important;
+  box-shadow: var(--brutal-shadow) !important;
+  background-color: var(--spice-main) !important;
+}
+
+.Root__now-playing-bar,
+.Root__now-playing-bar footer,
+.Root__right-sidebar,
+.UrfDp0_mKGL9hkfh9g_R {
+  border-radius: 0px !important;
+}
+
+/* Kartu Album & Playlist Neobrutalism */
+.main-card-card,
+.Box-group-naked-card-e131-0,
+div[data-encore-id="card"] {
+  background-color: var(--spice-card) !important;
+  border: var(--brutal-border) !important;
+  border-radius: 0px !important;
+  box-shadow: var(--brutal-shadow) !important;
+  transition: transform 0.12s ease, box-shadow 0.12s ease, background-color 0.12s ease !important;
+  padding: 12px !important;
+}
+
+.main-card-card:hover,
+div[data-encore-id="card"]:hover {
+  background-color: var(--spice-highlight) !important;
+  transform: translate(2px, 2px) !important;
+  box-shadow: var(--brutal-shadow-hover) !important;
+}
+
+/* Kotak Shortcut di Bagian Atas Home */
+.view-homeShortcutsGrid-shortcut {
+  background-color: var(--spice-card) !important;
+  border: var(--brutal-border-thin) !important;
+  border-radius: 0px !important;
+  box-shadow: var(--brutal-shadow-sm) !important;
+  transition: transform 0.1s ease, box-shadow 0.1s ease !important;
+}
+
+.view-homeShortcutsGrid-shortcut:hover {
+  background-color: var(--spice-highlight) !important;
+  transform: translate(2px, 2px) !important;
+  box-shadow: 1px 1px 0px var(--spice-shadow) !important;
+}
+
+/* =========================================================
+   KODE ASLI USER.CSS (DISESUAIKAN DENGAN KOTAK NEOBRUTALISM)
+   ========================================================= */
+
+/* Page titles */
+h1,
+h2,
+.main-entityHeader-title {
+  font-weight: 800 !important;
+  color: var(--spice-text) !important;
+  letter-spacing: -0.02em;
+}
+
+/* Song name in player */
+.main-nowPlayingWidget-nowPlaying .main-trackInfo-name {
+  overflow: unset;
+  font-size: 20px !important;
+  font-weight: 800 !important;
+}
+
+/* Artist name in player */
+.main-nowPlayingWidget-nowPlaying .main-trackInfo-artists {
+  overflow: unset;
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.main-type-finale {
+  line-height: 17px;
+}
+
+/* Icons */
+.main-trackList-rowPlayPauseIcon {
+  transform: scale(1.3);
+}
+
+.x-downloadButton-button svg {
+  height: 32px;
+  width: 32px;
+}
+
+/* Progress and remaining time */
+.main-playbackBarRemainingTime-container,
+.playback-bar__progress-time-elapsed,
+.playback-bar__progress-time {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--spice-text) !important;
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
+/* Progress bar (Kotak) */
+.progress-bar {
+  --fg-color: var(--spice-button);
+  --bg-color: var(--spice-highlight);
+}
+
+.progress-bar__bg,
+.progress-bar__fg,
+.progress-bar__fg_wrapper {
+  height: 8px !important;
+  border-radius: 0px !important;
+}
+
+.progress-bar__bg {
+  border: 1.5px solid var(--spice-shadow) !important;
+}
+
+.progress-bar-wrapper {
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
+/* Extra controls */
+.control-button::before {
+  font-size: 20px;
+}
+
+.ExtraControls svg {
+  height: 20px;
+  width: 20px;
+}
+
+/* Removing gradients */
+.main-entityHeader-backgroundColor,
+.main-actionBarBackground-background {
+  background-color: unset !important;
+  background-image: none !important;
+}
+
+/* Cover shadow */
+.main-entityHeader-shadow {
+  -webkit-box-shadow: var(--brutal-shadow) !important;
+  box-shadow: var(--brutal-shadow) !important;
+  border: var(--brutal-border) !important;
+  border-radius: 0px !important;
+}
+
+/* Top bar */
+.main-topBar-background {
+  background-color: var(--spice-main) !important;
+  border-bottom: var(--brutal-border) !important;
+}
+
+/* Playing icon */
+.main-trackList-playingIcon {
+  filter: saturate(0%);
+}
+
+/* Playlist like button */
+.main-actionBar-ActionBarRow .main-addButton-button .Svg-ulyrgf-0 {
+  height: unset;
+  width: unset;
+}
+
+/* Order button (Latar transparan sama dengan background) */
+.x-sortBox-sortDropdown {
+  margin-top: 3px;
+  border: none !important;
+  border-radius: 0px !important;
+  box-shadow: none !important;
+  background: transparent !important;
+  background-color: transparent !important;
+  color: var(--spice-text) !important;
+  font-weight: 700 !important;
+}
+
+.x-sortBox-sortDropdown:hover {
+  background: transparent !important;
+  background-color: transparent !important;
+  color: var(--spice-button-active) !important;
+}
+
+/* Sidebar playlists menu */
+.main-rootlist-rootlistDividerGradient {
+  background: unset;
+}
+
+.main-rootlist-rootlistDivider {
+  background-color: var(--spice-shadow);
+  height: 2px;
+}
+
+/* Search box (Kotak Tegas) */
+.main-globalNav-searchInputContainer input,
+.x-searchInput-searchInputInput,
+form[role="search"] input {
+  background-color: var(--spice-highlight) !important;
+  color: var(--spice-text) !important;
+  border: var(--brutal-border) !important;
+  border-radius: 0px !important;
+  box-shadow: var(--brutal-shadow-sm) !important;
+  font-size: 18px !important;
+  font-weight: 700 !important;
+}
+
+/* =========================================================
+   PERBAIKAN FITUR PENCARIAN (PLAYLIST & KOLEKSI KAMU)
+   Warna teks & placeholder kontras dan jelas (tidak nyaru)
+   ========================================================= */
+.x-filterBox-filterInput,
+.x-filterBox-expandedOrHasFilter .x-filterBox-filterInput,
+.Sgs4Ht3jSj96ueGuMvbh,
+input[role="searchbox"],
+input[type="search"],
+.main-actionBar-ActionBarRow input,
+.x-searchInput-searchInputInput {
+  background-color: var(--spice-card) !important;
+  color: var(--spice-text) !important;
+  -webkit-text-fill-color: var(--spice-text) !important;
+  border: var(--brutal-border-thin) !important;
+  border-radius: 0px !important;
+  box-shadow: 2px 2px 0px var(--spice-shadow) !important;
+  font-weight: 700 !important;
+  font-size: 14px !important;
+  padding: 6px 12px 6px 32px !important;
+  caret-color: var(--spice-text) !important;
+  opacity: 1 !important;
+}
+
+/* Placeholder pencarian: warna subtext tegas dan mudah dibaca */
+.x-filterBox-filterInput::placeholder,
+.x-filterBox-filterInput::-webkit-input-placeholder,
+.x-filterBox-filterInput::-moz-placeholder,
+.x-filterBox-filterInput:-ms-input-placeholder,
+.Sgs4Ht3jSj96ueGuMvbh::placeholder,
+.Sgs4Ht3jSj96ueGuMvbh::-webkit-input-placeholder,
+.Sgs4Ht3jSj96ueGuMvbh::-moz-placeholder,
+input[role="searchbox"]::placeholder,
+input[type="search"]::placeholder,
+.main-actionBar-ActionBarRow input::placeholder,
+.x-searchInput-searchInputInput::placeholder,
+input::placeholder {
+  color: var(--spice-subtext) !important;
+  -webkit-text-fill-color: var(--spice-subtext) !important;
+  opacity: 0.9 !important;
+  font-weight: 600 !important;
+}
+
+/* Ikon kaca pembesar (search icon) agar terlihat jelas */
+.x-filterBox-searchIconContainer,
+.x-filterBox-searchIcon,
+.x-filterBox-searchIconContainer svg,
+.x-filterBox-searchIconContainer path,
+.main-actionBar-ActionBarRow svg,
+.main-actionBar-ActionBarRow path {
+  color: var(--spice-text) !important;
+  fill: var(--spice-text) !important;
+  stroke: var(--spice-text) !important;
+  opacity: 1 !important;
+}
+
+/* =========================================================
+   PERBAIKAN MENU CONTEXT, POPUP (PLAYLIST, BLEND, FOLDER), & TOOLTIP
+   Warna kontras tinggi (#fff2f0), border kotak Neobrutalism, tanpa double box
+   ========================================================= */
+
+/* Hilangkan pembungkus luar ganda pada Tippy.js agar tidak double box */
+.tippy-box,
+div[data-tippy-root] > div {
+  background: transparent !important;
+  background-color: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+}
+
+.tippy-content {
+  padding: 0 !important;
+}
+
+.tippy-arrow {
+  display: none !important;
+}
+
+/* Tooltip Tunggal Neobrutalism (contoh: teks saat hover tombol +) */
+.main-contextMenu-tippy {
+  background-color: var(--spice-card) !important;
+  border: var(--brutal-border-thin) !important;
+  box-shadow: 2px 2px 0px var(--spice-shadow) !important;
+  border-radius: 0px !important;
+  color: var(--spice-text) !important;
+  font-weight: 700 !important;
+  padding: 6px 10px !important;
+  font-size: 13px !important;
+}
+
+/* Wadah Menu Context, Popup Tambah Playlist/Folder/Blend, Popover, dsb */
+#context-menu,
+.main-contextMenu-menu,
+ul[role="menu"],
+div[role="menu"],
+[data-encore-id="popover"],
+[data-encore-id="dialog"] {
+  background-color: var(--spice-card) !important;
+  border: var(--brutal-border) !important;
+  box-shadow: var(--brutal-shadow) !important;
+  border-radius: 0px !important;
+  padding: 8px !important;
+}
+
+/* Setiap baris item di dalam menu */
+.main-contextMenu-menuItem,
+.main-contextMenu-menuItemButton,
+[role="menuitem"],
+div[role="button"][class*="item"],
+li[role="presentation"] > button,
+li[role="presentation"] > div {
+  border-radius: 0px !important;
+  border: 1.5px solid transparent !important;
+  background-color: transparent !important;
+  color: var(--spice-text) !important;
+  padding: 8px 12px !important;
+  margin: 2px 0 !important;
+  transition: background-color 0.1s ease, border-color 0.1s ease !important;
+}
+
+/* Hover pada item menu: highlight kontras & kotak */
+.main-contextMenu-menuItem:hover,
+.main-contextMenu-menuItemButton:hover,
+[role="menuitem"]:hover,
+[role="menuitem"][aria-expanded="true"],
+li[role="presentation"] > button:hover,
+li[role="presentation"] > div:hover {
+  background-color: var(--spice-highlight) !important;
+  border-color: var(--spice-shadow) !important;
+  color: var(--spice-text) !important;
+}
+
+/* Judul item dalam menu (Playlist, Blend, Folder, dsb) */
+.main-contextMenu-menuItemTitle,
+[role="menuitem"] h3,
+[role="menuitem"] [class*="bodyMediumBold"],
+[role="menuitem"] [class*="title"] {
+  color: var(--spice-text) !important;
+  font-weight: 800 !important;
+  font-size: 15px !important;
+}
+
+/* Deskripsi / Subtitle dalam menu agar kontras & terbaca jelas (tidak nyaru) */
+.main-contextMenu-menuItemSubTitle,
+[role="menuitem"] p,
+[role="menuitem"] [class*="bodySmall"],
+[role="menuitem"] span:not([class*="title"]) {
+  color: var(--spice-subtext) !important;
+  font-weight: 600 !important;
+  font-size: 13px !important;
+  opacity: 1 !important;
+}
+
+/* Ikon di dalam Menu (Playlist, Folder, dsb) */
+.main-contextMenu-menuItem svg,
+.main-contextMenu-menuItemButton svg,
+[role="menuitem"] svg {
+  color: var(--spice-text) !important;
+  stroke: var(--spice-text) !important;
+}
+
+/* Khusus ikon lingkaran Blend yang sebelumnya putih pucat/nyaru */
+[role="menuitem"] svg circle,
+.main-contextMenu-menuItem svg circle {
+  fill: var(--spice-text) !important;
+  opacity: 0.9 !important;
+}
+
+/* Garis Pemisah (Divider) di dalam menu */
+.main-contextMenu-dividerBefore,
+.main-contextMenu-dividerAfter,
+[role="separator"] {
+  background-color: var(--spice-shadow) !important;
+  border: none !important;
+  height: 2px !important;
+  margin: 6px 0 !important;
+  opacity: 0.25 !important;
+}
+
+/* Artists names */
+.main-type-mesto {
+  font-size: 16px;
+  line-height: 20px;
+  font-weight: 600;
+}
+
+/* Songs names */
+.main-type-ballad {
+  font-size: 18px;
+  font-weight: 700;
+}
+
+/* Cards descriptions */
+.main-cardSubHeader-root {
+  overflow: hidden !important;
+}
+
+/* Ad title */
+.desktoproutes-homepage-takeover-ad-hptoNativeOriginal-header {
+  font-weight: 700 !important;
+}
+
+/* Friends names */
+.main-buddyFeed-username a {
+  color: var(--spice-text) !important;
+  font-size: 17px;
+  font-weight: 700;
+}
+
+/* Friends songs and artists */
+.main-buddyFeed-artistAndTrackName a,
+.main-buddyFeed-playbackContextLink span {
+  font-size: 13px;
+  font-weight: 600;
+}
+
+/* Cover height */
+.main-coverSlotExpanded-container {
+  height: calc(var(--nav-bar-width) + 8px);
+  border: var(--brutal-border-thin) !important;
+  box-shadow: var(--brutal-shadow-sm) !important;
+  border-radius: 0px !important;
+}
+
+/* =========================================================
+   STYLE LIST MUSIK / TRACKLIST (NEOBRUTALISM)
+   ========================================================= */
+
+/* Lebar kolom nomor urut / index */
+:root {
+  --index-column-width: 40px !important;
+}
+.main-trackList-trackList.main-trackList-indexable .main-trackList-trackListRowGrid {
+  --index-column-width: 40px !important;
+}
+
+/* Header Kolom Playlist (Judul, Album, dsb) */
+.main-trackList-trackListHeader {
+  margin-bottom: 8px !important;
+  border-bottom: var(--brutal-border-thin) !important;
+  background-color: transparent !important;
+}
+
+.main-trackList-trackListHeaderRow {
+  font-weight: 800 !important;
+  color: var(--spice-text) !important;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  font-size: 11px !important;
+}
+
+/* Setiap Baris Lagu (Opsi 1: Garis Pemisah Minimalis saat Diam, Kotak saat Hover/Active) */
+.main-trackList-trackListRow {
+  background-color: transparent !important;
+  border: 2px solid transparent !important;
+  border-bottom: 1.5px solid rgba(var(--spice-rgb-shadow), 0.18) !important;
+  border-radius: 0px !important;
+  box-shadow: none !important;
+  box-sizing: border-box !important;
+  height: var(--row-height, 56px) !important;
+  margin: 0 !important;
+  transition: background-color 0.15s ease, border-color 0.12s ease, transform 0.12s ease, box-shadow 0.12s ease !important;
+  position: relative !important;
+}
+
+.main-trackList-trackListRowGrid {
+  height: 100% !important;
+  align-items: center !important;
+}
+
+/* Hover: Langsung pop-out menjadi kartu Neobrutalism berbayangan */
+.main-trackList-trackListRow:hover {
+  background-color: var(--spice-highlight) !important;
+  border: var(--brutal-border-thin) !important;
+  box-shadow: 3px 3px 0px var(--spice-shadow) !important;
+  transform: translate(-1px, -1px) !important;
+  border-radius: 0px !important;
+  z-index: 5 !important;
+}
+
+/* Klik / Active state */
+.main-trackList-trackListRow:active {
+  transform: translate(1px, 1px) !important;
+  box-shadow: 1px 1px 0px var(--spice-shadow) !important;
+}
+
+/* Baris yang sedang dipilih (Selected) */
+.main-trackList-trackListRow.main-trackList-selected,
+.main-trackList-trackListRow[aria-selected="true"] {
+  background-color: var(--spice-selected-row) !important;
+  border: var(--brutal-border-thin) !important;
+  box-shadow: 2px 2px 0px var(--spice-shadow) !important;
+  border-radius: 0px !important;
+  z-index: 2 !important;
+}
+
+/* Baris yang sedang diputar (Playing / Active) */
+.main-trackList-trackListRow.main-trackList-active,
+.main-trackList-trackListRow:has(.main-trackList-playingIcon) {
+  background-color: var(--spice-highlight-elevated) !important;
+  border: 2px solid var(--spice-shadow) !important;
+  box-shadow: 2px 2px 0px var(--spice-shadow) !important;
+  z-index: 1 !important;
+}
+
+.main-trackList-trackListRow.main-trackList-active .main-trackList-rowTitle,
+.main-trackList-trackListRow:has(.main-trackList-playingIcon) .main-trackList-rowTitle {
+  color: var(--spice-button) !important;
+  font-weight: 800 !important;
+}
+
+/* Tipografi dan Elemen di dalam Baris Lagu */
+.main-trackList-number {
+  font-weight: 800 !important;
+  color: var(--spice-text) !important;
+  font-size: 13px !important;
+}
+
+.main-trackList-rowTitle {
+  font-weight: 700 !important;
+  color: var(--spice-text) !important;
+  font-size: 15px !important;
+}
+
+.main-trackList-rowSubTitle,
+.main-trackList-rowSubTitle a {
+  color: var(--spice-subtext) !important;
+  font-weight: 600 !important;
+  font-size: 13px !important;
+}
+
+.main-trackList-rowSectionVariable,
+.main-trackList-rowSectionVariable span,
+.main-trackList-duration {
+  color: var(--spice-subtext) !important;
+  font-weight: 600 !important;
+  font-size: 13px !important;
+  font-variant-numeric: tabular-nums;
+}
+
+.main-trackList-rowPlayPauseButton {
+  color: var(--spice-text) !important;
+}
+
+.main-trackList-rowPlayPauseButton:hover {
+  color: var(--spice-button) !important;
+  transform: scale(1.15) !important;
+}
+
+/* Text boxes in settings */
+.main-dropDown-dropDown {
+  background-color: var(--spice-highlight) !important;
+  color: var(--spice-text) !important;
+  border: var(--brutal-border-thin) !important;
+  box-shadow: 2px 2px 0px var(--spice-shadow) !important;
+  border-radius: 0px !important;
+  font-weight: 700;
+}
+
+/* Facebook button */
+.x-settings-facebookButton {
+  background-color: unset !important;
+}
+
+/* Playlist play button color (Kotak) */
+.encore-dark-theme .encore-bright-accent-set,
+.encore-dark-theme .encore-bright-accent-set:hover {
+  --background-base: var(--spice-button) !important;
+  --background-highlight: var(--spice-button-active) !important;
+  --background-press: var(--spice-button-active) !important;
+  color: var(--spice-shadow) !important;
+  border: var(--brutal-border-thin) !important;
+  box-shadow: var(--brutal-shadow-sm) !important;
+  border-radius: 0px !important;
+}
+
+/* Player bar */
+.main-nowPlayingBar-container {
+  justify-content: center;
+  height: var(--now-playing-bar-height);
+  width: 100%;
+  border-radius: 0px !important;
+  padding: var(--padding-now-playing-bar);
+  bottom: var(--margin-bottom-now-playing-bar);
+  border: var(--brutal-border) !important;
+  box-shadow: var(--brutal-shadow) !important;
+  background-color: var(--spice-player) !important;
+}
+
+.main-nowPlayingBar-container .GlueDropTarget,
+.main-coverSlotCollapsed-container {
+  max-height: 56px;
+  max-width: 56px;
+  border: var(--brutal-border-thin) !important;
+  border-radius: 0px !important;
+  box-shadow: 2px 2px 0px var(--spice-shadow) !important;
+}
+
+/**** SEMUA GAMBAR & ALBUM JADI KOTAK (0px) ****/
+.main-navBar-navBar > :nth-child(3) {
+  margin: 0 0 0 1px;
+  border-radius: 0px !important;
+}
+
+.cover-art-image,
+.artist-artistOverview-sideBlock
+  > div
+  > section
+  > div:nth-child(3)
+  > section:nth-child(2)
+  > div
+  > img,
+.view-homeShortcutsGrid-image {
+  border-radius: 0px !important;
+  border-right: var(--brutal-border-thin);
+}
+
+.main-entityHeader-shadow,
+.x-categoryCard-image,
+.x-entityImage-circle,
+.main-cardImage-image,
+.main-cardImage-imageWrapper,
+.main-entityHeader-imagePlaceholder > div,
+.artist-artistOverview-sideBlock > div > section,
+.main-yourLibraryX-listItemImage {
+  border-radius: 0px !important;
+}
+
+.main-cardImage-imageWrapper {
+  border: var(--brutal-border-thin) !important;
+  box-shadow: var(--brutal-shadow-sm) !important;
+}
+
+/* Foto Profil & Artis Dibuat Kotak juga agar konsisten Neobrutalism */
+.main-cardImage-circular,
+.main-entityHeader-imagePlaceholder,
+.main-entityHeader-circle {
+  border-radius: 0px !important;
+}
+
+/* Track List Image */
+.main-trackList-rowImage {
+  border-radius: 0px !important;
+  border: var(--brutal-border-thin) !important;
+  box-shadow: 1.5px 1.5px 0px var(--spice-shadow) !important;
+}
+
+/* Volume bar margins */
+.volume-bar .progress-bar {
+  margin: 0 0.4rem;
+}
+
+.volume-bar .playback-progressbar {
+  width: 70%;
+}
+
+.volume-bar {
+  flex: 0 150px;
+}
+
+.ellipsis-one-line.main-type-mesto {
+  font-size: 14px;
+}
+
+/* Removal of empty space above playlist cover and title on narrow viewports */
+.main-entityHeader-container.main-entityHeader-nonWrapped {
+  min-height: 325px;
+  height: 15vh;
+}
+
+.ffFwfKcPDbmAPLXzxzKq {
+  border-radius: 0px !important;
+}
+
+.playlist-playlist-actionBarBackground-background {
+  visibility: hidden;
+}
+
+/* =========================================================
+   TANPA SHADOW / GARIS NEOBRUTALISM & LATAR TRANSPARAN
+   (Sidebar kiri "Koleksi Kamu" & sidebar kanan Now Playing)
+   ========================================================= */
+/* Semua tombol di sidebar kiri tanpa latar (transparan menyatu dengan background) */
+.Root__nav-bar button,
+.Root__nav-bar button:hover,
+.Root__nav-bar button > span,
+.Root__nav-bar button > div,
+#Desktop_LeftSidebar_Id button,
+#Desktop_LeftSidebar_Id button:hover,
+#Desktop_LeftSidebar_Id button > span,
+#Desktop_LeftSidebar_Id button > div,
+.main-yourLibraryX-entryPoints button,
+.main-yourLibraryX-entryPoints button:hover,
+.main-yourLibraryX-header button,
+.main-yourLibraryX-header button:hover,
+.main-yourLibraryX-collapseButtonContainer button,
+.main-yourLibraryX-collapseButtonContainer button:hover,
+.main-yourLibraryX-createButton,
+.main-yourLibraryX-createButton:hover,
+.x-filterBox-expandButton,
+.x-filterBox-expandButton:hover,
+.x-sortBox-sortDropdown,
+.x-sortBox-sortDropdown:hover {
+  background: transparent !important;
+  background-color: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  transform: none !important;
+  color: var(--spice-text) !important;
+}
+
+.Root__nav-bar button svg,
+.Root__nav-bar button path,
+#Desktop_LeftSidebar_Id button svg,
+#Desktop_LeftSidebar_Id button path,
+.main-yourLibraryX-entryPoints button svg,
+.main-yourLibraryX-entryPoints button path {
+  fill: var(--spice-text) !important;
+  color: var(--spice-text) !important;
+}
+
+.Root__nav-bar button:hover svg,
+.Root__nav-bar button:hover path,
+#Desktop_LeftSidebar_Id button:hover svg,
+#Desktop_LeftSidebar_Id button:hover path,
+.main-yourLibraryX-entryPoints button:hover svg,
+.main-yourLibraryX-entryPoints button:hover path {
+  fill: var(--spice-button-active) !important;
+  color: var(--spice-button-active) !important;
+}
+
+/* Chip filter di sidebar kiri (Playlist, Artis, Didownload): FULL KOTAK (0px) & Latar transparan menyatu dengan background */
+.UCyimCp8rEfL5nB8paBu,
+.UCyimCp8rEfL5nB8paBu *,
+.UCyimCp8rEfL5nB8paBu::before,
+.UCyimCp8rEfL5nB8paBu::after,
+.Root__nav-bar [data-encore-id="chip"],
+.Root__nav-bar [data-encore-id="chip"] *,
+.Root__nav-bar [data-encore-id="chip"]::before,
+.Root__nav-bar [data-encore-id="chip"]::after,
+.main-yourLibraryX-filterArea button,
+.main-yourLibraryX-filterArea button *,
+.main-yourLibraryX-filterArea button::before,
+.main-yourLibraryX-filterArea button::after,
+.main-yourLibraryX-libraryFilter button,
+.main-yourLibraryX-libraryFilter button *,
+.main-yourLibraryX-libraryFilter button::before,
+.main-yourLibraryX-libraryFilter button::after {
+  border-radius: 0px !important;
+}
+
+.UCyimCp8rEfL5nB8paBu,
+.Root__nav-bar [data-encore-id="chip"],
+.main-yourLibraryX-filterArea button,
+.main-yourLibraryX-libraryFilter button {
+  background: transparent !important;
+  background-color: transparent !important;
+  border: var(--brutal-border-thin) !important;
+  border-radius: 0px !important;
+  box-shadow: none !important;
+  color: var(--spice-text) !important;
+  font-weight: 800 !important;
+}
+
+.UCyimCp8rEfL5nB8paBu:hover,
+.Root__nav-bar [data-encore-id="chip"]:hover,
+.main-yourLibraryX-filterArea button:hover,
+.main-yourLibraryX-libraryFilter button:hover {
+  background-color: var(--spice-highlight) !important;
+  color: var(--spice-button-active) !important;
+  border-color: var(--spice-shadow) !important;
+}
+
+/* Chip filter di sidebar kiri jika sedang aktif/terpilih */
+.UCyimCp8rEfL5nB8paBu.ZdJvNnfE3rlPCyM599YE,
+.Root__nav-bar button[role="checkbox"][aria-checked="true"],
+.Root__nav-bar [data-encore-id="chip"][aria-checked="true"],
+.main-yourLibraryX-filterArea button[aria-checked="true"],
+.main-yourLibraryX-libraryFilter button[aria-checked="true"],
+.main-yourLibraryX-filterArea button[aria-selected="true"],
+.main-yourLibraryX-libraryFilter button[aria-selected="true"] {
+  background-color: var(--spice-button) !important;
+  color: #ffffff !important;
+  border: var(--brutal-border-thin) !important;
+  border-radius: 0px !important;
+}
+
+/* Panel sidebar kiri & kanan tanpa bingkai/shadow */
+.Root__nav-bar .main-yourLibraryX-entryPoints,
+.Root__right-sidebar aside {
+  border: none !important;
+  box-shadow: none !important;
+}
+
+/* Gambar di sidebar kanan tanpa bingkai/shadow */
+.Root__right-sidebar .main-nowPlayingView-aboutArtistV2ImageContainer,
+.Root__right-sidebar .main-nowPlayingView-aboutArtistV2Image,
+.Root__right-sidebar .x-entityImage-imageContainer,
+.Root__right-sidebar .x-entityImage-imageContainer img,
+.Root__right-sidebar li[role="listitem"] img {
+  border: none !important;
+  box-shadow: none !important;
+}
+
+
+/* =========================================================
+   NEOVIBE COLOR SCHEME DROPDOWN (TOP BAR)
+   ========================================================= */
+#neovibe-scheme-container,
+#neovibe-scheme-container *,
+#pinkwow-scheme-container,
+#pinkwow-scheme-container * {
+  -webkit-app-region: no-drag !important;
+}
+
+#neovibe-scheme-btn,
+#pinkwow-scheme-btn {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  height: 32px !important;
+  padding: 0 10px !important;
+  background-color: var(--spice-card) !important;
+  color: var(--spice-text) !important;
+  border: var(--brutal-border-thin) !important;
+  box-shadow: 2px 2px 0px var(--spice-shadow) !important;
+  border-radius: 0px !important;
+  font-size: 12px !important;
+  font-weight: 800 !important;
+  cursor: pointer !important;
+  outline: none !important;
+  user-select: none !important;
+  white-space: nowrap !important;
+  transition: transform 0.1s ease, box-shadow 0.1s ease, background-color 0.1s ease !important;
+}
+
+#neovibe-scheme-btn:hover,
+#pinkwow-scheme-btn:hover {
+  transform: translate(1px, 1px) !important;
+  box-shadow: 1px 1px 0px var(--spice-shadow) !important;
+  background-color: var(--spice-highlight) !important;
+}
+
+#neovibe-scheme-menu,
+#pinkwow-scheme-menu {
+  position: absolute !important;
+  top: calc(100% + 6px) !important;
+  right: 0 !important;
+  min-width: 190px !important;
+  background-color: var(--spice-card) !important;
+  border: var(--brutal-border) !important;
+  box-shadow: var(--brutal-shadow) !important;
+  border-radius: 0px !important;
+  padding: 6px !important;
+  z-index: 999999 !important;
+  flex-direction: column !important;
+  gap: 3px !important;
+}
+
+.neovibe-menu-item,
+.pinkwow-menu-item {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  padding: 6px 10px !important;
+  font-size: 12px !important;
+  font-weight: 700 !important;
+  color: var(--spice-text) !important;
+  cursor: pointer !important;
+  border-radius: 0px !important;
+  border: 1px solid transparent !important;
+  background: transparent !important;
+  user-select: none !important;
+  transition: background-color 0.1s ease, border-color 0.1s ease, color 0.1s ease !important;
+}
+
+.neovibe-menu-item:hover,
+.pinkwow-menu-item:hover {
+  background-color: var(--spice-highlight) !important;
+  border-color: var(--spice-shadow) !important;
+  color: var(--spice-text) !important;
+}
+
+.neovibe-menu-item.active,
+.pinkwow-menu-item.active {
+  background-color: var(--spice-button) !important;
+  color: #ffffff !important;
+  border-color: var(--spice-shadow) !important;
+}
+
+/* Smooth color transition when changing tracks or scheme */
+body, 
+.Root__top-container,
+.main-yourLibraryX-entryPoints,
+.main-nowPlayingView-section,
+.main-nowPlayingBar-container,
+.Root__nav-bar,
+.main-topBar-container {
+  transition: background-color 0.4s ease, border-color 0.4s ease, color 0.4s ease !important;
+}
+

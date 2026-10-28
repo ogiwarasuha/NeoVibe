@@ -1,0 +1,15 @@
+# IDE & Tools
+.opencode/
+.idea/
+.vscode/
+
+# OS artifacts
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+.DS_Store
+
+# Temporary files
+*.tmp
+*.log
