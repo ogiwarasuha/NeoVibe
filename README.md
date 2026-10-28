@@ -1,5 +1,9 @@
 # NeoVibe — Spotify Neobrutalism Theme
 
+<p align="center">
+  <img src="assets/social-preview.png" alt="NeoVibe Spotify Neobrutalism Theme" width="100%">
+</p>
+
 > Tema Spotify modern berbasis Neobrutalism dengan Dynamic Album Art Colors dan All-In-One Built-In Extensions (Adblock, Hide Podcasts, No Controls).
 
 ---
