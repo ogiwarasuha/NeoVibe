@@ -16,13 +16,33 @@ if (!(Test-Path $spotifyPath)) {
     Write-Host "https://www.spotify.com/download`n" -ForegroundColor Underline
 }
 
-# 2. Cek / Pasang Spicetify CLI
+# 2. Cek / Pasang Spicetify CLI (Otomatis & Tanpa Prompt Marketplace)
 Write-Host "[1/4] Memeriksa Spicetify CLI..." -ForegroundColor Cyan
-if (!(Get-Command spicetify -ErrorAction SilentlyContinue)) {
-    Write-Host "Spicetify belum terpasang. Memasang Spicetify secara otomatis..." -ForegroundColor Yellow
+$spicetifyDir = "$env:LOCALAPPDATA\spicetify"
+$spicetifyExe = "$spicetifyDir\spicetify.exe"
+
+if (!(Get-Command spicetify -ErrorAction SilentlyContinue) -and !(Test-Path $spicetifyExe)) {
+    Write-Host "Spicetify belum terpasang. Memasang Spicetify CLI resmi..." -ForegroundColor Yellow
     try {
-        Invoke-Expression (Invoke-RestMethod -Uri "https://raw.githubusercontent.com/spicetify/cli/main/install.ps1")
-        $env:PATH += ";$env:LOCALAPPDATA\spicetify"
+        $arch = if ([Environment]::Is64BitOperatingSystem) { "x64" } else { "x32" }
+        if ($env:PROCESSOR_ARCHITECTURE -eq "ARM64") { $arch = "arm64" }
+        $latest = Invoke-RestMethod -Uri "https://api.github.com/repos/spicetify/cli/releases/latest"
+        $version = $latest.tag_name -replace '^v', ''
+        $zipUrl = "https://github.com/spicetify/cli/releases/download/v$version/spicetify-$version-windows-$arch.zip"
+        $tempSpiceZip = "$env:TEMP\spicetify.zip"
+
+        Invoke-WebRequest -Uri $zipUrl -OutFile $tempSpiceZip -UseBasicParsing
+        if (!(Test-Path $spicetifyDir)) { New-Item -ItemType Directory -Path $spicetifyDir -Force | Out-Null }
+        Expand-Archive -Path $tempSpiceZip -DestinationPath $spicetifyDir -Force
+        Remove-Item $tempSpiceZip -Force -ErrorAction SilentlyContinue
+
+        # Daftarkan ke PATH pengguna
+        $userPath = [Environment]::GetEnvironmentVariable("Path", "User")
+        if ($userPath -notlike "*$spicetifyDir*") {
+            [Environment]::SetEnvironmentVariable("Path", "$userPath;$spicetifyDir", "User")
+        }
+        $env:PATH = "$env:PATH;$spicetifyDir"
+        Write-Host "Spicetify CLI v$version berhasil dipasang." -ForegroundColor Green
     } catch {
         Write-Host "Gagal memasang Spicetify: $_" -ForegroundColor Red
         exit 1
@@ -30,6 +50,8 @@ if (!(Get-Command spicetify -ErrorAction SilentlyContinue)) {
 } else {
     Write-Host "Spicetify CLI sudah terpasang." -ForegroundColor Green
 }
+
+$spicetifyCmd = if (Get-Command spicetify -ErrorAction SilentlyContinue) { "spicetify" } else { $spicetifyExe }
 
 # 3. Menyiapkan Folder Tema
 $themesDir = "$env:APPDATA\spicetify\Themes"
@@ -65,16 +87,17 @@ try {
 
 # 4. Menerapkan Konfigurasi Spicetify
 Write-Host "`n[3/4] Mengonfigurasi Spicetify..." -ForegroundColor Cyan
-& spicetify config current_theme NeoVibe
-& spicetify config inject_theme_js 1
-& spicetify config inject_css 1
-& spicetify config replace_colors 1
+& $spicetifyCmd config current_theme NeoVibe
+& $spicetifyCmd config inject_theme_js 1
+& $spicetifyCmd config inject_css 1
+& $spicetifyCmd config replace_colors 1
 
 # 5. Terapkan Tema ke Spotify
 Write-Host "`n[4/4] Memasang tema ke Spotify..." -ForegroundColor Cyan
-& spicetify backup apply
+Stop-Process -Name Spotify -Force -ErrorAction SilentlyContinue
+Start-Sleep -Seconds 1
+& $spicetifyCmd backup apply
 
 Write-Host "`n========================================================" -ForegroundColor Green
 Write-Host " Sukses! Tema NeoVibe berhasil dipasang ke Spotify.     " -ForegroundColor Green
 Write-Host "========================================================`n" -ForegroundColor Green
-
