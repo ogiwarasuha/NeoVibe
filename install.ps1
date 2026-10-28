@@ -55,6 +55,12 @@ if ($currentVer -notlike "$targetVersion*") {
     if (!(Test-Path $dest)) { New-Item -ItemType Directory -Path $dest -Force | Out-Null }
     Start-Process -FilePath $tempInstaller -ArgumentList "/extract `"$dest`"" -Wait
 
+    # Bersihkan cache browser lama agar tidak crash saat downgrade versi
+    $browserCache = "$env:LOCALAPPDATA\Spotify\Browser"
+    if (Test-Path $browserCache) {
+        Remove-Item $browserCache -Recurse -Force -ErrorAction SilentlyContinue
+    }
+
     # Buat shortcut desktop
     try {
         $wsh = New-Object -ComObject WScript.Shell
@@ -81,7 +87,7 @@ try {
     }
     New-Item -ItemType File -Path $localUpdate -Force | Out-Null
     Set-ItemProperty -Path $localUpdate -Name Attributes -Value ([System.IO.FileAttributes]::ReadOnly)
-    icacls $localUpdate /deny "*S-1-1-0:(W,D,X)" 2>$null | Out-Null
+    icacls $localUpdate /deny "*S-1-1-0:(W,D)" 2>$null | Out-Null
 
     # Blokir SpotifyUpdate.exe di AppData Roaming
     $roamingUpdate = "$env:APPDATA\Spotify\SpotifyUpdate.exe"
@@ -91,7 +97,7 @@ try {
     }
     New-Item -ItemType File -Path $roamingUpdate -Force | Out-Null
     Set-ItemProperty -Path $roamingUpdate -Name Attributes -Value ([System.IO.FileAttributes]::ReadOnly)
-    icacls $roamingUpdate /deny "*S-1-1-0:(W,D,X)" 2>$null | Out-Null
+    icacls $roamingUpdate /deny "*S-1-1-0:(W,D)" 2>$null | Out-Null
 
     Write-Host "Pembaruan otomatis Spotify berhasil dinonaktifkan." -ForegroundColor Green
 } catch {
