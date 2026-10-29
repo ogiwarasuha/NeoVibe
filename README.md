@@ -81,11 +81,12 @@ Bagi Anda yang menginginkan proses instalasi otomatis tanpa perlu menyalin berka
 iwr -useb https://raw.githubusercontent.com/ogiwarasuha/NeoVibe/main/install.ps1 | iex
 ```
 
-*Skrip ini bekerja secara All-In-One:*
-- Memeriksa versi Spotify (otomatis unduh & pasang Spotify v1.2.77.358 LTS jika belum terpasang).
-- Mengunci pembaruan otomatis Spotify secara permanen agar tema tidak rusak.
-- Memasang Spicetify CLI secara otomatis tanpa prompt interaktif.
-- Mengunduh dan menerapkan tema NeoVibe langsung ke Spotify Anda.
+*Skrip ini bekerja secara All-In-One & Clean-Slate:*
+- **Membersihkan sistem secara total**: Menghentikan proses yang aktif, menghapus Spotify versi Microsoft Store (UWP) maupun installer lama, serta membersihkan sisa konfigurasi Spicetify lama yang berpotensi memicu konflik (*bug/error*).
+- **Memasang Spotify v1.2.77.358 LTS**: Mengunduh dan mengekstrak versi LTS yang bersih dan terbukti stabil.
+- **Mengunci pembaruan otomatis Spotify** secara permanen agar tema tidak rusak atau tertimpa versi baru.
+- **Memasang Spicetify CLI resmi terbaru** secara otomatis tanpa *prompt* interaktif.
+- **Mengunduh dan menerapkan tema NeoVibe** langsung ke Spotify Anda.
 
 ### Pilihan 2: Unduh Berkas Installer Otomatis
 1. [Unduh Berkas install.bat](https://raw.githubusercontent.com/ogiwarasuha/NeoVibe/main/install.bat)
@@ -234,9 +235,24 @@ Hapus folder tema `NeoVibe` dari direktori Spicetify:
 Remove-Item "$env:APPDATA\spicetify\Themes\NeoVibe" -Recurse -Force -ErrorAction SilentlyContinue
 ```
 
-#### Langkah 4: (Opsional) Hapus Spicetify CLI Sepenuhnya
-Jika Anda tidak ingin lagi menggunakan Spicetify maupun tema lainnya sama sekali dari komputer Anda:
+#### Langkah 4: Pembersihan Total Manual (Hapus Spotify & Spicetify Bersih)
+Jika instalasi di komputer Anda atau rekan Anda bermasalah karena sisa Spotify Microsoft Store atau Spicetify lama, jalankan pembersihan total berikut di PowerShell:
 ```powershell
+# 1. Hentikan semua proses
+Stop-Process -Name Spotify, SpotifyUpdate, spicetify -Force -ErrorAction SilentlyContinue
+
+# 2. Hapus versi Microsoft Store / Winget
+Get-AppxPackage -AllUsers *Spotify* | Remove-AppxPackage -AllUsers -ErrorAction SilentlyContinue
+Get-AppxPackage *Spotify* | Remove-AppxPackage -ErrorAction SilentlyContinue
+winget uninstall --id Spotify.Spotify -e --silent 2>$null
+
+# 3. Reset hak akses dan hapus folder Spotify
+icacls "$env:LOCALAPPDATA\Spotify" /reset /t /c /q 2>$null
+Remove-Item "$env:LOCALAPPDATA\Spotify" -Recurse -Force -ErrorAction SilentlyContinue
+icacls "$env:APPDATA\Spotify" /reset /t /c /q 2>$null
+Remove-Item "$env:APPDATA\Spotify" -Recurse -Force -ErrorAction SilentlyContinue
+
+# 4. Hapus folder Spicetify lama
 Remove-Item "$env:LOCALAPPDATA\spicetify" -Recurse -Force -ErrorAction SilentlyContinue
 Remove-Item "$env:APPDATA\spicetify" -Recurse -Force -ErrorAction SilentlyContinue
 ```
