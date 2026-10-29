@@ -1,31 +1,95 @@
 # =========================================================
-# NeoVibe — One-Click Automated Installer for Windows
-# (Auto-Setup Spotify 1.2.77.358 + Anti-Update + Spicetify)
+# NeoVibe — One-Click Automated Clean Installer for Windows
+# (Pembersihan Total + Spotify 1.2.77.358 LTS + Anti-Update + Spicetify + Tema)
 # =========================================================
 
 $ErrorActionPreference = "Stop"
 
 Write-Host "`n========================================================" -ForegroundColor Cyan
-Write-Host "   NeoVibe Spotify Theme Installer (All-In-One Setup)   " -ForegroundColor Cyan
+Write-Host "   NeoVibe Spotify Theme Installer (All-In-One Clean)   " -ForegroundColor Cyan
 Write-Host "========================================================`n" -ForegroundColor Cyan
 
-# 1. Pastikan Spotify v1.2.77.358 (Versi Paling Stabil untuk Mod/Tema)
-Write-Host "[1/5] Memeriksa versi Spotify..." -ForegroundColor Cyan
-$targetVersion = "1.2.77.358"
-$spotifyPath = "$env:APPDATA\Spotify\Spotify.exe"
-$currentVer = if (Test-Path $spotifyPath) { (Get-Item $spotifyPath).VersionInfo.ProductVersion } else { $null }
+# 1. Hentikan Semua Proses Terkait Spotify & Spicetify
+Write-Host "[1/6] Menutup semua proses Spotify dan Spicetify..." -ForegroundColor Cyan
+Stop-Process -Name Spotify, SpotifyUpdate, SpotifyInstaller, spicetify -Force -ErrorAction SilentlyContinue
+Start-Sleep -Seconds 1
 
-if ($currentVer -notlike "$targetVersion*") {
-    Write-Host "Spotify versi $targetVersion belum terpasang (Versi saat ini: $(if ($currentVer) { $currentVer } else { 'Belum terpasang' }))." -ForegroundColor Yellow
-    Write-Host "Mengunduh Spotify v$targetVersion (LTS Stabil & Bebas Bug)..." -ForegroundColor Cyan
-    
+# 2. Hapus Bersih Spotify Microsoft Store / UWP & Sisa Instalasi Lama
+Write-Host "`n[2/6] Membersihkan semua Spotify lama (termasuk versi Microsoft Store)..." -ForegroundColor Cyan
+
+# Hapus Spotify dari Microsoft Store (UWP) via PowerShell & Winget
+try {
+    Get-AppxPackage -AllUsers *Spotify* | Remove-AppxPackage -AllUsers -ErrorAction SilentlyContinue
+    Get-AppxPackage *Spotify* | Remove-AppxPackage -ErrorAction SilentlyContinue
+} catch {}
+
+if (Get-Command winget.exe -ErrorAction SilentlyContinue) {
+    try {
+        & winget.exe uninstall --id Spotify.Spotify -e --silent --accept-source-agreements 2>&1 | Out-Null
+        & winget.exe uninstall --id 9NCBCSZSJRSB -e --silent --accept-source-agreements 2>&1 | Out-Null
+    } catch {}
+}
+
+# Reset izin keamanan folder Spotify lama sebelum dihapus (agar tidak Access Denied)
+$spotifyLocal = "$env:LOCALAPPDATA\Spotify"
+$spotifyRoaming = "$env:APPDATA\Spotify"
+
+if (Test-Path $spotifyLocal) {
+    try {
+        icacls $spotifyLocal /reset /t /c /q 2>$null | Out-Null
+        Get-ChildItem -Path $spotifyLocal -Recurse -Force -ErrorAction SilentlyContinue | ForEach-Object { $_.Attributes = 'Normal' }
+        Remove-Item $spotifyLocal -Recurse -Force -ErrorAction SilentlyContinue
+    } catch {}
+}
+
+if (Test-Path $spotifyRoaming) {
+    try {
+        icacls $spotifyRoaming /reset /t /c /q 2>$null | Out-Null
+        Get-ChildItem -Path $spotifyRoaming -Recurse -Force -ErrorAction SilentlyContinue | ForEach-Object { $_.Attributes = 'Normal' }
+        Remove-Item $spotifyRoaming -Recurse -Force -ErrorAction SilentlyContinue
+    } catch {}
+}
+
+# Hapus bersih seluruh folder Spicetify lama (Clean Slate)
+Write-Host "Membersihkan direktori Spicetify lama..." -ForegroundColor Cyan
+$spicetifyLocal = "$env:LOCALAPPDATA\spicetify"
+$spicetifyRoaming = "$env:APPDATA\spicetify"
+
+if (Test-Path $spicetifyLocal) {
+    Remove-Item $spicetifyLocal -Recurse -Force -ErrorAction SilentlyContinue
+}
+if (Test-Path $spicetifyRoaming) {
+    Remove-Item $spicetifyRoaming -Recurse -Force -ErrorAction SilentlyContinue
+}
+
+# Hapus shortcut Spotify lama jika ada
+$desktopShortcutPath = [Environment]::GetFolderPath("Desktop") + "\Spotify.lnk"
+if (Test-Path $desktopShortcutPath) {
+    Remove-Item $desktopShortcutPath -Force -ErrorAction SilentlyContinue
+}
+
+Write-Host "Sistem telah bersih total dari Spotify & Spicetify lama." -ForegroundColor Green
+
+# 3. Unduh & Pasang Spotify v1.2.77.358 LTS Stabil
+Write-Host "`n[3/6] Menyiapkan Spotify v1.2.77.358 LTS..." -ForegroundColor Cyan
+$targetVersion = "1.2.77.358"
+$tempInstaller = "$env:TEMP\Spotify_1.2.77.358.exe"
+
+# Periksa apakah installer sudah pernah diunduh dan valid (> 50MB)
+$needDownload = $true
+if (Test-Path $tempInstaller) {
+    if ((Get-Item $tempInstaller).Length -gt 50MB) {
+        $needDownload = $false
+        Write-Host "Installer Spotify 1.2.77.358 ditemukan di cache lokal." -ForegroundColor Green
+    }
+}
+
+if ($needDownload) {
+    Write-Host "Mengunduh Spotify v$targetVersion (LTS Bebas Bug)..." -ForegroundColor Cyan
     $downloadUrls = @(
         "https://github.com/ogiwarasuha/NeoVibe/releases/download/v1.0.0/Spotify_1.2.77.358.exe",
         "https://loadspot.amd64fox1.workers.dev/download/spotify_installer-1.2.77.358.g4339a634-x64.exe"
     )
-
-    $tempInstaller = "$env:TEMP\Spotify_1.2.77.358.exe"
-    Stop-Process -Name Spotify, SpotifyUpdate -Force -ErrorAction SilentlyContinue
 
     $downloadSuccess = $false
     foreach ($url in $downloadUrls) {
@@ -49,38 +113,43 @@ if ($currentVer -notlike "$targetVersion*") {
         Write-Host "Gagal mengunduh installer Spotify 1.2.77.358. Silakan periksa koneksi internet Anda." -ForegroundColor Red
         exit 1
     }
-
-    Write-Host "Mengekstrak dan memasang Spotify v$targetVersion..." -ForegroundColor Cyan
-    $dest = "$env:APPDATA\Spotify"
-    if (!(Test-Path $dest)) { New-Item -ItemType Directory -Path $dest -Force | Out-Null }
-    Start-Process -FilePath $tempInstaller -ArgumentList "/extract `"$dest`"" -Wait
-
-    # Bersihkan cache browser lama agar tidak crash saat downgrade versi
-    $browserCache = "$env:LOCALAPPDATA\Spotify\Browser"
-    if (Test-Path $browserCache) {
-        Remove-Item $browserCache -Recurse -Force -ErrorAction SilentlyContinue
-    }
-
-    # Buat shortcut desktop
-    try {
-        $wsh = New-Object -ComObject WScript.Shell
-        $desktopShortcut = $wsh.CreateShortcut([Environment]::GetFolderPath("Desktop") + "\Spotify.lnk")
-        $desktopShortcut.TargetPath = "$dest\Spotify.exe"
-        $desktopShortcut.Save()
-    } catch {}
-
-    Write-Host "Spotify v$targetVersion berhasil dipasang." -ForegroundColor Green
-} else {
-    Write-Host "Spotify versi $targetVersion sudah terpasang." -ForegroundColor Green
 }
 
-# 2. Kunci dan Matikan Pembaruan Otomatis Spotify (Agar Tema Tidak Rusak)
-Write-Host "`n[2/5] Mengunci pembaruan otomatis Spotify..." -ForegroundColor Cyan
+Write-Host "Memasang Spotify v$targetVersion..." -ForegroundColor Cyan
+$dest = "$env:APPDATA\Spotify"
+if (!(Test-Path $dest)) { New-Item -ItemType Directory -Path $dest -Force | Out-Null }
+Start-Process -FilePath $tempInstaller -ArgumentList "/extract `"$dest`"" -Wait
+
+if (!(Test-Path "$dest\Spotify.exe")) {
+    Write-Host "Mengekstrak via mode silent..." -ForegroundColor Yellow
+    Start-Process -FilePath $tempInstaller -ArgumentList "/silent" -Wait
+}
+
+# Buat shortcut desktop baru
+try {
+    $wsh = New-Object -ComObject WScript.Shell
+    $shortcut = $wsh.CreateShortcut($desktopShortcutPath)
+    $shortcut.TargetPath = "$dest\Spotify.exe"
+    $shortcut.Save()
+} catch {}
+
+# Inisialisasi berkas prefs awal agar Spicetify langsung mendeteksinya
+$prefsFile = "$dest\prefs"
+if (!(Test-Path $prefsFile)) {
+    Set-Content -Path $prefsFile -Value "app.last-launched-version=`"$targetVersion`"" -Force
+}
+
+Write-Host "Spotify v$targetVersion berhasil dipasang." -ForegroundColor Green
+
+# 4. Kunci Pembaruan Otomatis Spotify (Permanen)
+Write-Host "`n[4/6] Mengunci pembaruan otomatis Spotify..." -ForegroundColor Cyan
 try {
     Stop-Process -Name Spotify, SpotifyUpdate -Force -ErrorAction SilentlyContinue
-    
+
     # Blokir folder Update di LocalAppData
     $localUpdate = "$env:LOCALAPPDATA\Spotify\Update"
+    $localParent = "$env:LOCALAPPDATA\Spotify"
+    if (!(Test-Path $localParent)) { New-Item -ItemType Directory -Path $localParent -Force | Out-Null }
     if (Test-Path $localUpdate) {
         icacls $localUpdate /reset /t /c /q 2>$null | Out-Null
         Remove-Item $localUpdate -Recurse -Force -ErrorAction SilentlyContinue
@@ -104,67 +173,58 @@ try {
     Write-Host "Peringatan saat mengunci update: $_" -ForegroundColor Yellow
 }
 
-# 3. Cek / Pasang Spicetify CLI (Otomatis & Tanpa Prompt Marketplace)
-Write-Host "`n[3/5] Memeriksa Spicetify CLI..." -ForegroundColor Cyan
+# 5. Pasang Spicetify CLI Resmi Terbaru (Fresh)
+Write-Host "`n[5/6] Memasang Spicetify CLI..." -ForegroundColor Cyan
 $spicetifyDir = "$env:LOCALAPPDATA\spicetify"
 $spicetifyExe = "$spicetifyDir\spicetify.exe"
 
-if (!(Get-Command spicetify -ErrorAction SilentlyContinue) -and !(Test-Path $spicetifyExe)) {
-    Write-Host "Spicetify belum terpasang. Memasang Spicetify CLI resmi..." -ForegroundColor Yellow
-    try {
-        $arch = if ([Environment]::Is64BitOperatingSystem) { "x64" } else { "x32" }
-        if ($env:PROCESSOR_ARCHITECTURE -eq "ARM64") { $arch = "arm64" }
-        $latest = Invoke-RestMethod -Uri "https://api.github.com/repos/spicetify/cli/releases/latest"
-        $version = $latest.tag_name -replace '^v', ''
-        $zipUrl = "https://github.com/spicetify/cli/releases/download/v$version/spicetify-$version-windows-$arch.zip"
-        $tempSpiceZip = "$env:TEMP\spicetify.zip"
+try {
+    $arch = if ([Environment]::Is64BitOperatingSystem) { "x64" } else { "x32" }
+    if ($env:PROCESSOR_ARCHITECTURE -eq "ARM64") { $arch = "arm64" }
+    $latest = Invoke-RestMethod -Uri "https://api.github.com/repos/spicetify/cli/releases/latest"
+    $version = $latest.tag_name -replace '^v', ''
+    $zipUrl = "https://github.com/spicetify/cli/releases/download/v$version/spicetify-$version-windows-$arch.zip"
+    $tempSpiceZip = "$env:TEMP\spicetify.zip"
 
-        Invoke-WebRequest -Uri $zipUrl -OutFile $tempSpiceZip -UseBasicParsing
-        if (!(Test-Path $spicetifyDir)) { New-Item -ItemType Directory -Path $spicetifyDir -Force | Out-Null }
-        Expand-Archive -Path $tempSpiceZip -DestinationPath $spicetifyDir -Force
-        Remove-Item $tempSpiceZip -Force -ErrorAction SilentlyContinue
+    Invoke-WebRequest -Uri $zipUrl -OutFile $tempSpiceZip -UseBasicParsing
+    if (!(Test-Path $spicetifyDir)) { New-Item -ItemType Directory -Path $spicetifyDir -Force | Out-Null }
+    Expand-Archive -Path $tempSpiceZip -DestinationPath $spicetifyDir -Force
+    Remove-Item $tempSpiceZip -Force -ErrorAction SilentlyContinue
 
-        # Daftarkan ke PATH pengguna
-        $userPath = [Environment]::GetEnvironmentVariable("Path", "User")
-        if ($userPath -notlike "*$spicetifyDir*") {
-            [Environment]::SetEnvironmentVariable("Path", "$userPath;$spicetifyDir", "User")
-        }
-        $env:PATH = "$env:PATH;$spicetifyDir"
-        Write-Host "Spicetify CLI v$version berhasil dipasang." -ForegroundColor Green
-    } catch {
-        Write-Host "Gagal memasang Spicetify: $_" -ForegroundColor Red
-        exit 1
+    # Daftarkan ke PATH pengguna
+    $userPath = [Environment]::GetEnvironmentVariable("Path", "User")
+    if ($userPath -notlike "*$spicetifyDir*") {
+        [Environment]::SetEnvironmentVariable("Path", "$userPath;$spicetifyDir", "User")
     }
-} else {
-    Write-Host "Spicetify CLI sudah terpasang." -ForegroundColor Green
+    $env:PATH = "$env:PATH;$spicetifyDir"
+    Write-Host "Spicetify CLI v$version berhasil dipasang." -ForegroundColor Green
+} catch {
+    Write-Host "Gagal memasang Spicetify: $_" -ForegroundColor Red
+    exit 1
 }
 
-$spicetifyCmd = if (Get-Command spicetify -ErrorAction SilentlyContinue) { "spicetify" } else { $spicetifyExe }
+$spicetifyCmd = if (Test-Path $spicetifyExe) { $spicetifyExe } else { "spicetify" }
 
-# 4. Menyiapkan Folder Tema
+# Unduh Berkas Tema NeoVibe
 $themesDir = "$env:APPDATA\spicetify\Themes"
-$targetDir = "$themesDir\NeoVibe"
+$targetThemeDir = "$themesDir\NeoVibe"
+if (!(Test-Path $themesDir)) { New-Item -ItemType Directory -Path $themesDir -Force | Out-Null }
 
-if (!(Test-Path $themesDir)) {
-    New-Item -ItemType Directory -Path $themesDir -Force | Out-Null
-}
-
-Write-Host "`n[4/5] Mengunduh berkas tema NeoVibe..." -ForegroundColor Cyan
-
+Write-Host "Mengunduh berkas tema NeoVibe terbaru..." -ForegroundColor Cyan
 $repoZipUrl = "https://github.com/ogiwarasuha/NeoVibe/archive/refs/heads/main.zip"
 $tempZip = "$env:TEMP\NeoVibe.zip"
 $tempExtract = "$env:TEMP\NeoVibe-extract"
 
 try {
     if (Get-Command git -ErrorAction SilentlyContinue) {
-        if (Test-Path $targetDir) { Remove-Item $targetDir -Recurse -Force }
-        git clone https://github.com/ogiwarasuha/NeoVibe.git $targetDir
+        if (Test-Path $targetThemeDir) { Remove-Item $targetThemeDir -Recurse -Force }
+        git clone https://github.com/ogiwarasuha/NeoVibe.git $targetThemeDir
     } else {
         Invoke-WebRequest -Uri $repoZipUrl -OutFile $tempZip -UseBasicParsing
         if (Test-Path $tempExtract) { Remove-Item $tempExtract -Recurse -Force }
         Expand-Archive -Path $tempZip -DestinationPath $tempExtract -Force
-        if (Test-Path $targetDir) { Remove-Item $targetDir -Recurse -Force }
-        Move-Item "$tempExtract\NeoVibe-main" $targetDir -Force
+        if (Test-Path $targetThemeDir) { Remove-Item $targetThemeDir -Recurse -Force }
+        Move-Item "$tempExtract\NeoVibe-main" $targetThemeDir -Force
         Remove-Item $tempZip, $tempExtract -Recurse -Force -ErrorAction SilentlyContinue
     }
     Write-Host "Berkas tema berhasil diunduh ke folder Themes." -ForegroundColor Green
@@ -173,21 +233,10 @@ try {
     exit 1
 }
 
-# 5. Menerapkan Konfigurasi Spicetify & Pasang ke Spotify
-Write-Host "`n[5/5] Menerapkan tema NeoVibe ke Spotify..." -ForegroundColor Cyan
+# 6. Menerapkan Tema ke Spotify
+Write-Host "`n[6/6] Menerapkan tema NeoVibe ke Spotify..." -ForegroundColor Cyan
 
-# Daftarkan lokasi Spotify dan berkas prefs secara eksplisit agar Spicetify selalu menemukannya
-$spotifyDir = "$env:APPDATA\Spotify"
-$prefsFile = "$spotifyDir\prefs"
-
-if (!(Test-Path $spotifyDir)) {
-    New-Item -ItemType Directory -Path $spotifyDir -Force | Out-Null
-}
-if (!(Test-Path $prefsFile)) {
-    New-Item -ItemType File -Path $prefsFile -Force | Out-Null
-}
-
-& $spicetifyCmd config spotify_path $spotifyDir
+& $spicetifyCmd config spotify_path $dest
 & $spicetifyCmd config prefs_path $prefsFile
 & $spicetifyCmd config current_theme NeoVibe
 & $spicetifyCmd config inject_theme_js 1
@@ -197,18 +246,18 @@ if (!(Test-Path $prefsFile)) {
 Stop-Process -Name Spotify, SpotifyUpdate -Force -ErrorAction SilentlyContinue
 Start-Sleep -Seconds 1
 
-# Terapkan konfigurasi tema ke Spotify
+# Terapkan konfigurasi tema (backup apply untuk instalasi bersih)
 $oldPref = $ErrorActionPreference
 $ErrorActionPreference = "Continue"
 
-& $spicetifyCmd apply
+& $spicetifyCmd backup apply
 if ($LASTEXITCODE -ne 0) {
-    & $spicetifyCmd backup apply
+    & $spicetifyCmd apply
 }
 
 $ErrorActionPreference = $oldPref
 
 Write-Host "`n========================================================" -ForegroundColor Green
 Write-Host " Sukses! Spotify v$targetVersion + Tema NeoVibe Berhasil!" -ForegroundColor Green
-Write-Host " Pembaruan otomatis Spotify telah dimatikan permanen.   " -ForegroundColor Green
+Write-Host " Bersih total dari sisa instalasi lama & anti-update aktif." -ForegroundColor Green
 Write-Host "========================================================`n" -ForegroundColor Green
