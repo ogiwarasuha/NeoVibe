@@ -203,10 +203,14 @@ iwr -useb https://raw.githubusercontent.com/ogiwarasuha/NeoVibe/main/uninstall.p
 ```
 
 *Skrip ini secara otomatis akan:*
-1. Mengembalikan Spotify ke tampilan standar (*stock*).
+1. Mengembalikan Spotify ke tampilan standar (*stock/original*).
 2. Membuka kembali kunci pembaruan otomatis Spotify.
 3. Menghapus folder tema `NeoVibe`.
-4. Membersihkan sisa *cache* modifikasi.
+4. Menghapus Spicetify CLI dan konfigurasinya secara menyeluruh dari komputer.
+5. Membersihkan *Environment PATH* dan sisa *cache* modifikasi.
+
+> [!TIP]
+> Anda juga dapat mengunduh berkas [uninstall.bat](https://raw.githubusercontent.com/ogiwarasuha/NeoVibe/main/uninstall.bat) lalu klik dua kali untuk menjalankan pembersihan otomatis.
 
 ---
 
